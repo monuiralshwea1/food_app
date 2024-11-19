@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:foodly_ui/constants.dart';
+import '../../../constants.dart';
 
 import '../../dot_indicators.dart';
 import 'big_card_image.dart';
 
 class BigCardImageSlide extends StatefulWidget {
   const BigCardImageSlide({
-    Key? key,
+    super.key,
     required this.images,
-  }) : super(key: key);
+  });
 
   final List images;
 
   @override
-  _BigCardImageSlideState createState() => _BigCardImageSlideState();
+  State<BigCardImageSlide> createState() => _BigCardImageSlideState();
 }
 
 class _BigCardImageSlideState extends State<BigCardImageSlide> {

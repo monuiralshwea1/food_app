@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:foodly_ui/constants.dart';
+import '../../constants.dart';
 
 import '../dot_indicators.dart';
 
 class BigCardImageSlideScalton extends StatelessWidget {
   const BigCardImageSlideScalton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

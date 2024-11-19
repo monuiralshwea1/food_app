@@ -1,33 +1,30 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:foodly_ui/constants.dart';
-import 'package:foodly_ui/screens/onboarding/onboarding_scrreen.dart';
+//import 'package:food_app/route/RoutingPage.dart';
+import 'package:foodly_ui/route/RoutingPage.dart';
+import 'package:get/get.dart';
+import 'binding.dart';
+import 'constants.dart';
 
-import 'firebase_options.dart';
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application. dd
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'The Flutter Way - Foodly UI Kit',
+    return GetMaterialApp(
+      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      locale: const Locale('ar'),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: primaryColor,
-            foregroundColor: Colors.blueGrey,
+            foregroundColor: Colors.white,
             minimumSize: const Size(double.infinity, 40),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
@@ -43,7 +40,9 @@ class MyApp extends StatelessWidget {
           hintStyle: TextStyle(color: bodyTextColor),
         ),
       ),
-      home: const OnboardingScreen(),
+      initialBinding: Binding(),
+      initialRoute: ScreenName.splash,
+      getPages: RoutingPage().getRout,
     );
   }
 }

@@ -6,13 +6,14 @@ class SocalButton extends StatelessWidget {
   final Widget icon;
   final GestureTapCallback press;
 
-  const SocalButton(
-      {Key? key,
-      required this.color,
-      required this.icon,
-      required this.press,
-      required this.text})
-      : super(key: key);
+  const SocalButton({
+    super.key,
+    required this.color,
+    required this.icon,
+    required this.press,
+    required this.text,
+  });
+
   @override
   Widget build(BuildContext context) {
     const padding = EdgeInsets.symmetric(horizontal: 16, vertical: 8);

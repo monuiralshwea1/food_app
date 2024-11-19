@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 
 // clolors that we use in our app
 const titleColor = Color(0xFF010F07);
-const primaryColor = Color(0xFFffc8dd);
-const accentColor = Color(0xFFcddafd);
+const primaryColor = Color(0xFF22A45D);
+const accentColor = Color(0xFFEF9920);
 const bodyTextColor = Color(0xFF868686);
 const inputColor = Color(0xFFFBFBFB);
 
@@ -39,24 +38,24 @@ const InputDecoration otpInputDecoration = InputDecoration(
 const kErrorBorderSide = BorderSide(color: Colors.red, width: 1);
 
 // Validator
-final passwordValidator = MultiValidator([
-  RequiredValidator(errorText: 'Password is required'),
-  MinLengthValidator(8, errorText: 'Password must be at least 8 digits long'),
-  PatternValidator(r'(?=.*?[#?!@$%^&*-/])',
-      errorText: 'Passwords must have at least one special character')
-]);
-
-final emailValidator = MultiValidator([
-  RequiredValidator(errorText: 'Email is required'),
-  EmailValidator(errorText: 'Enter a valid email address')
-]);
-
-final requiredValidator =
-    RequiredValidator(errorText: 'This field is required');
-final matchValidator = MatchValidator(errorText: 'passwords do not match');
-
-final phoneNumberValidator = MinLengthValidator(10,
-    errorText: 'Phone Number must be at least 10 digits long');
+// final passwordValidator = MultiValidator([
+//   RequiredValidator(errorText: 'Password is required'),
+//   MinLengthValidator(8, errorText: 'Password must be at least 8 digits long'),
+//   PatternValidator(r'(?=.*?[#?!@$%^&*-/])',
+//       errorText: 'Passwords must have at least one special character')
+// ]);
+//
+// final emailValidator = MultiValidator([
+//   RequiredValidator(errorText: 'Email is required'),
+//   EmailValidator(errorText: 'Enter a valid email address')
+// ]);
+//
+// final requiredValidator =
+//     RequiredValidator(errorText: 'This field is required');
+// final matchValidator = MatchValidator(errorText: 'passwords do not match');
+//
+// final phoneNumberValidator = MinLengthValidator(10,
+//     errorText: 'Phone Number must be at least 10 digits long');
 
 // Common Text
 final Center kOrText = Center(
