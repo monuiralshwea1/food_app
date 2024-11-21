@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:get/get.dart';
 import '../../components/cards/big/restaurant_info_big_card.dart';
 import '../../components/scalton/big_card_scalton.dart';
 import '../../constants.dart';
@@ -49,7 +49,7 @@ class _SearchScreenState extends State<SearchScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: defaultPadding),
-              Text('Search', style: Theme.of(context).textTheme.headlineMedium),
+              Text('Search'.tr, style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: defaultPadding),
               const SearchForm(),
               const SizedBox(height: defaultPadding),
@@ -118,7 +118,7 @@ class _SearchFormState extends State<SearchForm> {
         style: Theme.of(context).textTheme.labelLarge,
         textInputAction: TextInputAction.search,
         decoration: InputDecoration(
-          hintText: "Search on foodly",
+          hintText: "Search on foodly".tr,
           contentPadding: kTextFieldPadding,
           prefixIcon: Padding(
             padding: const EdgeInsets.all(8.0),

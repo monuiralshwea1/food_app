@@ -24,7 +24,7 @@ class RoutingPage{
 
   final List<GetPage> _setPAges = [
     GetPage(name: ScreenName.splash, page: () => const SplachScreen()),
-    GetPage(name: ScreenName.entryPoint, page: () =>const EntryPoint()),
+    GetPage(name: ScreenName.entryPoint, page: () => EntryPoint()),
     GetPage(name: ScreenName.homeScreen, page: () => const HomeScreen()),
     GetPage(name: ScreenName.featuredScreen, page: () => const FeaturedScreen()),
     GetPage(name: ScreenName.detailsScreen, page: () => const DetailsScreen()

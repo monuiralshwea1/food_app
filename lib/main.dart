@@ -4,6 +4,7 @@ import 'package:foodly_ui/route/RoutingPage.dart';
 import 'package:get/get.dart';
 import 'binding.dart';
 import 'constants.dart';
+import 'translation/translation_service.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,9 +17,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'food',
       debugShowCheckedModeBanner: false,
-      locale: const Locale('ar'),
+      translations: TranslationService(),
+      locale: Get.deviceLocale,
+      fallbackLocale: const Locale('ar'),
+      defaultTransition: Transition.fade,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
         elevatedButtonTheme: ElevatedButtonThemeData(
