@@ -1,9 +1,90 @@
 import 'package:get/get.dart';
 
 final Map<String, String> arTranslations = {
-  'Home': 'الرئيسية',
-  'Search': 'بحث',
+  // الكلمات العامة
+  'Welcome': 'مرحباً',
+  'Menu': 'القائمة',
   'Orders': 'الطلبات',
-  'Profile': 'حسابي',
-  'Search on foodl':'بحث عن اكلات'
+  'Profile': 'الملف الشخصي',
+  'Settings': 'الإعدادات',
+  'Logout': 'تسجيل الخروج',
+  'Sing in':'  تسجيل الدخول',
+  'sing in':' تسجيل الدخول في الحساب',
+  'Login': 'تسجيل الدخول',
+  'Sing up':'تسجيل حساب',
+  'sing up':'تسجيل حساب جديد ',
+  'Register': 'التسجيل',
+  'Create Account':'انشاء حساب',
+  'Enter your Name':'ادخل اسمك',
+  'Email and Password':'البريد وكلمة المرور',
+  'for sign up.':'لتسجيل حساب',
+  'Already have account? ':'هل تملك حساب ',
+  'Email Address':'عنوان البريد',
+  'Password':'كلمة المرور',
+  'Home': 'الصفحة الرئيسية',
+  'Search': 'بحث',
+  'search_on_foodly':'بحث عن الاطعمة',
+  'Favorites': 'المفضلة',
+  'Cart': 'سلة التسوق',
+  'Confirm': 'تأكيد',
+  'Cancel': 'إلغاء',
+  'Submit': 'إرسال',
+  'Contact_us': 'تواصل معنا',
+  'Terms and Conditions': 'الشروط والأحكام',
+  'Privacy Policy': 'سياسة الخصوصية',
+  'Language': 'اللغة',
+  'English': 'الإنجليزية',
+  'Arabic': 'العربية',
+
+
+  // الأقسام الخاصة بالطعام
+  'appetizers': 'المقبلات',
+  'main_course': 'الأطباق الرئيسية',
+  'desserts': 'الحلويات',
+  'beverages': 'المشروبات',
+  'salads': 'السلطات',
+  'soup': 'الشوربة',
+  'offers': 'العروض',
+  'combo_meals': 'وجبات كومبو',
+  'kids_menu': 'قائمة الأطفال',
+
+  // الطلب والدفع
+  'Add to Cart': 'أضف إلى السلة',
+  'Checkout': 'إنهاء الطلب',
+  'Payment': 'الدفع',
+  'Cash on Delivery': 'الدفع عند الاستلام',
+  'Credit Card': 'بطاقة ائتمان',
+  'Total': 'الإجمالي',
+  'Quantity': 'الكمية',
+  'Price': 'السعر',
+  'Delivery Address': 'عنوان التوصيل',
+  'Order Details': 'تفاصيل الطلب',
+  'Track Order': 'تتبع الطلب',
+
+  // الإشعارات والرسائل
+  'Oder Placed': 'تم تقديم الطلب',
+  'Order Confirmed': 'تم تأكيد الطلب',
+  'Order Delivered': 'تم توصيل الطلب',
+  'Order Cancelled': 'تم إلغاء الطلب',
+  'Out of Stock': 'غير متوفر',
+  'New Notification': 'إشعار جديد',
+
+  //واجهات الحساب
+  'Account Settings':'اعداد الحسابات',
+  'Update your settings like notifications, payments, profile edit etc.':'قم بتحديث إعداداتك مثل الإشعارات والمدفوعات وتعديل الملف الشخصي وما إلى ذلك',
+  'Profile Information':'معلومات الحساب',
+  'Change your account information':'قم بتغيير معلومات حسابك',
+  'Change Password':'تغير كلمة السر',
+  'Change your password':'قم بتغيير كلمة المرور الخاصة بك',
+  'Payment Methods':'طرق الدفع',
+  'Add your credit & debit cards':'أضف بطاقات الائتمان والخصم الخاصة بك',
+  'Locations':'المواقع',
+  'Add or remove your delivery locations':'ضافة أو إزالة مواقع التسليم الخاصة بك',
+  'Add Social Account':'إضافة حساب اجتماعي',
+  'Add Facebook, Twitter etc':'اضافة فيسبوك  تويتر',
+  'Refer to Friends':'الرجوع إلى الأصدقاء',
+  'Get \$10 for reffering friends':'احصل على 10 دولارات مقابل إحالة صديق',
+
+
+
 };

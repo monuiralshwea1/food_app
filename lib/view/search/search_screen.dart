@@ -118,7 +118,7 @@ class _SearchFormState extends State<SearchForm> {
         style: Theme.of(context).textTheme.labelLarge,
         textInputAction: TextInputAction.search,
         decoration: InputDecoration(
-          hintText: "Search on foodly".tr,
+          hintText: "search_on_foodly".tr,
           contentPadding: kTextFieldPadding,
           prefixIcon: Padding(
             padding: const EdgeInsets.all(8.0),
