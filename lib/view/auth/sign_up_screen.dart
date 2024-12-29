@@ -1,103 +1,94 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../../components/buttons/socal_button.dart';
-import '../../components/welcome_text.dart';
-import '../../constants.dart';
-import 'components/sign_in_form.dart';
 import 'package:get/get.dart';
+import '../controllers/auth_controller.dart';
 
+class RegisterView extends GetView<AuthController> {
+  RegisterView({Key? key}) : super(key: key);
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+  final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title:  Text("Sing up".tr),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      appBar: AppBar(title: Text('Register'.tr)),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: ListView(
             children: [
-               WelcomeText(
-                title: "Create Account".tr,
-                text: '${'Enter your Name'.tr}, ${'Email and Password'.tr} \n${'for sign up.'.tr},'
+              TextFormField(
+                controller: _nameController,
+                decoration: InputDecoration(labelText: 'Name'.tr),
+                validator: (value) => value?.isEmpty ?? true ? 'Required'.tr : null,
               ),
-
-              // Sign Up Form
-              const SignInForm(),
-              const SizedBox(height: defaultPadding),
-
-              //Already have account
-              Center(
-                child: Text.rich(
-                  TextSpan(
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .copyWith(fontWeight: FontWeight.w500),
-                    text: "Already have account? ".tr,
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Sing in'.tr,
-                        style: const TextStyle(color: primaryColor),
-                        recognizer: TapGestureRecognizer()
-                          // ..onTap = () => Navigator.push(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //         builder: (context) => const SignInScreen(),
-                          //       ),
-                          //     ),
-                      ),
-                    ],
-                  ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(labelText: 'Email'.tr),
+                validator: (value) => value?.isEmpty ?? true ? 'Required'.tr : null,
+                keyboardType: TextInputType.emailAddress,
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _passwordController,
+                decoration: InputDecoration(labelText: 'Password'.tr),
+                validator: (value) => value?.isEmpty ?? true ? 'Required'.tr : null,
+                obscureText: true,
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _phoneController,
+                decoration: InputDecoration(labelText: 'Phone'.tr),
+                validator: (value) => value?.isEmpty ?? true ? 'Required'.tr : null,
+                keyboardType: TextInputType.phone,
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _addressController,
+                decoration: InputDecoration(labelText: 'Address'.tr),
+                validator: (value) => value?.isEmpty ?? true ? 'Required'.tr : null,
+              ),
+              const SizedBox(height: 24),
+              Obx(() => controller.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : ElevatedButton(
+                onPressed: _handleRegister,
+                child: Text('Register'.tr),
+              ),
+              ),
+              Obx(() => controller.error.isNotEmpty
+                  ? Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Text(
+                  controller.error,
+                  style: const TextStyle(color: Colors.red),
+                  textAlign: TextAlign.center,
                 ),
+              )
+                  : const SizedBox(),
               ),
-              // const SizedBox(height: defaultPadding),
-              // Center(
-              //   child: Text(
-              //     "By Signing up you agree to our Terms \nConditions & Privacy Policy.",
-              //     textAlign: TextAlign.center,
-              //     style: Theme.of(context).textTheme.bodyMedium,
-              //   ),
-              // ),
-              // const SizedBox(height: defaultPadding),
-              // kOrText,
-              // const SizedBox(height: defaultPadding),
-              //
-              // // Facebook
-              // SocalButton(
-              //   press: () {},
-              //   text: "Connect with Facebook",
-              //   color: const Color(0xFF395998),
-              //   icon: SvgPicture.asset(
-              //     'assets/icons/facebook.svg',
-              //     colorFilter: const ColorFilter.mode(
-              //       Color(0xFF395998),
-              //       BlendMode.srcIn,
-              //     ),
-              //   ),
-              // ),
-              // const SizedBox(height: defaultPadding),
-              //
-              // // Google
-              // SocalButton(
-              //   press: () {},
-              //   text: "Connect with Google",
-              //   color: const Color(0xFF4285F4),
-              //   icon: SvgPicture.asset(
-              //     'assets/icons/google.svg',
-              //   ),
-              // ),
-              // const SizedBox(height: defaultPadding),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _handleRegister() {
+    if (_formKey.currentState?.validate() ?? false) {
+      controller.register(
+        name: _nameController.text,
+        email: _emailController.text,
+        password: _passwordController.text,
+        phone: _phoneController.text,
+        address: _addressController.text,
+      );
+    }
   }
 }
