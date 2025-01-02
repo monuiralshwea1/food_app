@@ -1,5 +1,7 @@
+import 'package:foodly_ui/controller/category_controller.dart';
 import 'package:foodly_ui/controller/meal_iem_controller.dart';
 import 'package:foodly_ui/repositories/auth_repositorie.dart';
+import 'package:foodly_ui/repositories/category_repositorie.dart';
 import 'package:foodly_ui/repositories/meal_item_repositorie.dart';
 import 'package:get/get.dart';
 import 'controller/auth/sing_controller.dart';
@@ -21,7 +23,11 @@ class Binding extends Bindings{
     Get.lazyPut(()=> AppDrawerController(Get.find<StorageService>()),fenix:true);
     Get.lazyPut(() => MealItemRepository(Get.find<DioClient>()),fenix:true);
     Get.lazyPut(() => MealItemController(Get.find<MealItemRepository>()),fenix:true);
-    // Get.lazyPut(() => VolunteerController(),fenix:true);
+    Get.lazyPut(() => CategoryRepository(Get.find<DioClient>()),fenix:true);
+    Get.lazyPut(() => CategoryController(Get.find<CategoryRepository>()),fenix:true);
+
+
+
 
   }
 }
