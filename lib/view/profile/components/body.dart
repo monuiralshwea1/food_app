@@ -36,7 +36,7 @@ class Body extends StatelessWidget {
                 title: "Sing up".tr,
                 subTitle: "sing up".tr,
                 press: () {
-                  Get.offAllNamed(ScreenName.SingUpScreen);
+                  Get.toNamed(ScreenName.SingUpScreen);
                 },
               ),
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodly_ui/components/app_drawer.dart';
 import 'package:get/get.dart';
 import '../components/bottom_nav_bar.dart';
 import '../controller/navigation_controller.dart';
@@ -14,12 +15,13 @@ class EntryPoint extends GetView<NavigationController> {
     const HomeScreen(),
     const SearchScreen(),
     const OrderDetailsScreen(),
-    const ProfileScreen(),
+    //const ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer:const AppDrawer(),
       body: Obx(() => _screens[controller.selectedIndex]),
       bottomNavigationBar: const BottomNavBar(),
     );

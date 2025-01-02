@@ -4,8 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../components/buttons/socal_button.dart';
 import '../../components/welcome_text.dart';
 import '../../constants.dart';
+import '../../route/RoutingPage.dart';
 import 'components/sign_in_form.dart';
 import 'package:get/get.dart';
+
+import 'components/sign_up_form.dart';
 
 
 class SignUpScreen extends StatelessWidget {
@@ -29,7 +32,7 @@ class SignUpScreen extends StatelessWidget {
               ),
 
               // Sign Up Form
-              const SignInForm(),
+              const SignUpForm(),
               const SizedBox(height: defaultPadding),
 
               //Already have account
@@ -46,12 +49,7 @@ class SignUpScreen extends StatelessWidget {
                         text: 'Sing in'.tr,
                         style: const TextStyle(color: primaryColor),
                         recognizer: TapGestureRecognizer()
-                          // ..onTap = () => Navigator.push(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //         builder: (context) => const SignInScreen(),
-                          //       ),
-                          //     ),
+                          ..onTap = () =>  () => Get.toNamed(ScreenName.SinginScreen)
                       ),
                     ],
                   ),

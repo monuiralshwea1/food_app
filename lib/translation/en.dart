@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 final Map<String, String> enTranslations = {
   // الكلمات العامة
+  'Valley Restaurants':'Valley Restaurants',
   'Welcome': 'Welcome',
   'Menu': 'Menu',
   'Orders': 'Orders',
@@ -19,8 +20,13 @@ final Map<String, String> enTranslations = {
   'Email and Password':'Email and Password',
   'for sign up.':'for sign up.',
   'Already have account? ':'Already have account? ',
+  'Dont you have an account?':'Dont you have an account?',
   'Email Address':'Email Address',
   'Password':'Password',
+  'Name':'Name',
+  'Confirm Password':'Confirm Password',
+  'Phone Number':'Phone Number',
+  'Address':'Address',
   'Home': 'Home',
   'Search': 'Search',
   'search_on_foodly':'Search on foodly',

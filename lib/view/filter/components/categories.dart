@@ -16,10 +16,10 @@ class _CategoriesState extends State<Categories> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionTitle(
+        const SectionTitle(
           title: "Categories",
-          press: () {},
-          isMainSection: false,
+          //press: () {},
+          //isMainSection: false,
         ),
         const SizedBox(height: defaultPadding),
         Padding(

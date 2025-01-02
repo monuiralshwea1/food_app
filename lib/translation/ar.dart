@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 final Map<String, String> arTranslations = {
   // الكلمات العامة
+  'Valley Restaurants':'مطاعم الوادي',
   'Welcome': 'مرحباً',
   'Menu': 'القائمة',
   'Orders': 'الطلبات',
@@ -19,8 +20,13 @@ final Map<String, String> arTranslations = {
   'Email and Password':'البريد وكلمة المرور',
   'for sign up.':'لتسجيل حساب',
   'Already have account? ':'هل تملك حساب ',
+  'Dont you have an account?':'الا تمتلك  حساب ؟',
   'Email Address':'عنوان البريد',
   'Password':'كلمة المرور',
+  'Name':'الاسم',
+  'Confirm Password':'تاكيد كلمة المرور',
+  'Phone Number':'رقم الهاتف',
+  'Address':'العنوان',
   'Home': 'الصفحة الرئيسية',
   'Search': 'بحث',
   'search_on_foodly':'بحث عن الاطعمة',

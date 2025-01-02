@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../../components/app_drawer.dart';
 import '../../components/cards/big/big_card_image_slide.dart';
 import '../../components/cards/big/restaurant_info_big_card.dart';
 import '../../components/section_title.dart';
 import '../../constants.dart';
 import '../../demo_data.dart';
 import '../../route/RoutingPage.dart';
+import 'components/meal_item_list.dart';
 import 'components/medium_card_list.dart';
-import 'components/promotion_banner.dart';
 import 'package:get/get.dart';
+
+import 'components/promotion_banner.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,34 +20,17 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const AppDrawer(),
       appBar: AppBar(
         leading: const SizedBox(),
-        title: Column(
+        title:  Column(
           children: [
             Text(
-              "Delivery to".toUpperCase(),
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall!
-                  .copyWith(color: primaryColor),
-            ),
-            const Text(
-              "San Francisco",
-              style: TextStyle(color: Colors.black),
+              "Valley Restaurants".tr,
+              style: const TextStyle(color: Colors.green),
             )
           ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Get.toNamed(ScreenName.featuredScreen);
-            },
-            child: Text(
-              "Filter",
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-          ),
-        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -56,24 +43,24 @@ class HomeScreen extends StatelessWidget {
                 child: BigCardImageSlide(images: demoBigImages),
               ),
               const SizedBox(height: defaultPadding * 2),
-              SectionTitle(
+              const SectionTitle(
                 title: "Featured Partners",
-                press: () =>    Get.toNamed(ScreenName.featuredScreen),
+                //press: () =>    Get.toNamed(ScreenName.featuredScreen),
               ),
               const SizedBox(height: defaultPadding),
               const MediumCardList(),
               const SizedBox(height: 20),
               // Banner
-              const PromotionBanner(),
-              const SizedBox(height: 20),
-              SectionTitle(
+              //const PromotionBanner(),
+              const SectionTitle(
+
                 title: "Best Pick",
-                press: () =>    Get.toNamed(ScreenName.featuredScreen),
+             //   press: () =>    Get.toNamed(ScreenName.featuredScreen),
               ),
               const SizedBox(height: 16),
-              const MediumCardList(),
+               const MealItemList(),
               const SizedBox(height: 20),
-              SectionTitle(title: "All Restaurants", press: () {}),
+             // SectionTitle(title: "All Restaurants", press: () {}),
               const SizedBox(height: 16),
 
               // Demo list of Big Cards

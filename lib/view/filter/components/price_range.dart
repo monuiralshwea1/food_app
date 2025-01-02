@@ -11,10 +11,10 @@ class PriceRange extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionTitle(
+        const SectionTitle(
           title: "Price Range",
-          press: () {},
-          isMainSection: false,
+         // press: () {},
+         // isMainSection: false,
         ),
         const SizedBox(height: defaultPadding),
         SingleChildScrollView(

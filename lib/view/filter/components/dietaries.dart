@@ -16,11 +16,11 @@ class _DietariesState extends State<Dietaries> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionTitle(
+        const SectionTitle(
           title: "Dietary",
           // When press the clean all
-          press: () {},
-          isMainSection: false,
+          //press: () {},
+          //isMainSection: false,
         ),
         const SizedBox(height: defaultPadding),
         Padding(

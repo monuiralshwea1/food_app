@@ -41,12 +41,12 @@ class BottomNavBar extends GetView<NavigationController> {
               isSelected: controller.selectedIndex == 2,
               onTap: () => controller.changeIndex(2),
             ),
-            NavBarItem(
-              icon: 'assets/icons/profile.svg',
-              label: 'Profile'.tr,
-              isSelected: controller.selectedIndex == 3,
-              onTap: () => controller.changeIndex(3),
-            ),
+            // NavBarItem(
+            //   icon: 'assets/icons/profile.svg',
+            //   label: 'Profile'.tr,
+            //   isSelected: controller.selectedIndex == 3,
+            //   onTap: () => controller.changeIndex(3),
+            // ),
           ],
         ),
       ),
