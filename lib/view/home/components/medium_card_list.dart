@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodly_ui/controller/category_controller.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../components/cards/medium/restaurant_info_medium_card.dart';
 import '../../../components/scalton/medium_card_scalton.dart';
@@ -31,10 +32,10 @@ class MediumCardList extends GetView<CategoryController> {
             }
 
             if (controller.error.isNotEmpty) {
-              return   buildFeaturedPartnersLoadingIndicator();//SizedBox(
-              //   height: 10.h,
-              //   child: Center(child: Text(controller.error.value)),
-              // );
+              SizedBox(
+                height: 10.h,
+                child: Center(child: Text(controller.error.value)),
+              );
             }
             return ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -42,7 +43,7 @@ class MediumCardList extends GetView<CategoryController> {
               itemBuilder: (context, index) => Padding(
                 padding: EdgeInsets.only(
                   left: defaultPadding,
-                  right: (data.length - 1) == index ? defaultPadding : 0,
+                  right: (controller.categorys.length - 1) == index ? defaultPadding : 0,
                 ),
                 child: RestaurantInfoMediumCard(
                    category: controller.categorys[index],

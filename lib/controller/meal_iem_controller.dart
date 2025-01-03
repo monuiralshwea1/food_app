@@ -15,14 +15,11 @@ class MealItemController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
     fetchMealItems();
-
   }
 
   Future<void> fetchMealItems() async {
     try {
-
       isLoading.value = true;
       error.value = '';
       final items = await _mealItemRepository.getMealItems();

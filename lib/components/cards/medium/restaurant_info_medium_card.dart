@@ -10,17 +10,17 @@ class RestaurantInfoMediumCard extends StatelessWidget {
    RestaurantInfoMediumCard({
     super.key,
     required this.category,
-     required this.pass
+     required this.press
   });
 
   Category category;
-    GestureTapCallback pass;
+   final VoidCallback press;
 
 
    @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: pass,
+      onTap: press,
       child: SizedBox(
         width: 200,
         child: Column(
@@ -30,12 +30,12 @@ class RestaurantInfoMediumCard extends StatelessWidget {
               aspectRatio: 1.25,
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
-                child: CachedNetworkImage(
+                child:category.image!=null? CachedNetworkImage(
                   imageUrl: category.image!,
-                  placeholder: (context, url) => CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  placeholder: (context, url) => const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                   fit:BoxFit.cover,
-                ),
+                ):SizedBox.fromSize(),
               ),
             ),
             const SizedBox(height: defaultPadding / 2),

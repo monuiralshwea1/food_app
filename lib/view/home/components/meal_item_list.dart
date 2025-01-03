@@ -23,10 +23,10 @@ class MealItemList extends GetView<MealItemController> {
       }
 
       if (controller.error.isNotEmpty) {
-         return   buildFeaturedPartnersLoadingIndicator();//SizedBox(
-        //   height: 10.h,
-        //   child: Center(child: Text(controller.error.value)),
-        // );
+         return SizedBox(
+          height: 10.h,
+          child: Center(child: Text(controller.error.value)),
+        );
       }
 
       return SizedBox(
