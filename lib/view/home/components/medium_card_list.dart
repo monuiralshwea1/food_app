@@ -1,29 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:foodly_ui/controller/category_controller.dart';
 
 import '../../../components/cards/medium/restaurant_info_medium_card.dart';
 import '../../../components/scalton/medium_card_scalton.dart';
 import '../../../constants.dart';
 import '../../../demo_data.dart';
 import '../../details/details_screen.dart';
+import 'package:get/get.dart';
 
-class MediumCardList extends StatefulWidget {
-  const MediumCardList({super.key});
+class MediumCardList extends GetView<CategoryController> {
+   MediumCardList({super.key});
 
-  @override
-  State<MediumCardList> createState() => _MediumCardListState();
-}
-
-class _MediumCardListState extends State<MediumCardList> {
-  bool isLoading = true;
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 1), () {
-      setState(() {
-        isLoading = false;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,33 +22,45 @@ class _MediumCardListState extends State<MediumCardList> {
         SizedBox(
           width: double.infinity,
           height: 254,
-          child: isLoading
-              ? buildFeaturedPartnersLoadingIndicator()
-              : ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: data.length,
-                  itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.only(
-                      left: defaultPadding,
-                      right: (data.length - 1) == index ? defaultPadding : 0,
-                    ),
-                    child: RestaurantInfoMediumCard(
-                      image: data[index]['image'],
-                      name: data[index]['name'],
-                      location: data[index]['location'],
-                      delivertTime: 25,
-                      rating: 4.6,
-                      press: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const DetailsScreen(),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+          child:Obx((){
+            if (controller.isLoading.value) {
+              return buildFeaturedPartnersLoadingIndicator();//SizedBox(
+              //   height: 10.h,
+              //   child: const Center(child: CircularProgressIndicator()),
+              // );
+            }
+
+            if (controller.error.isNotEmpty) {
+              return   buildFeaturedPartnersLoadingIndicator();//SizedBox(
+              //   height: 10.h,
+              //   child: Center(child: Text(controller.error.value)),
+              // );
+            }
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: controller.categorys.length,
+              itemBuilder: (context, index) => Padding(
+                padding: EdgeInsets.only(
+                  left: defaultPadding,
+                  right: (data.length - 1) == index ? defaultPadding : 0,
                 ),
+                child: RestaurantInfoMediumCard(
+                   category: controller.categorys[index],
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DetailsScreen(),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+
+          })
+
+
         ),
       ],
     );

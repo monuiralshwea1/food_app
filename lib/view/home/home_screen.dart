@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                 //press: () =>    Get.toNamed(ScreenName.featuredScreen),
               ),
               const SizedBox(height: defaultPadding),
-              const MediumCardList(),
+               MediumCardList(),
               const SizedBox(height: 20),
               // Banner
               //const PromotionBanner(),
