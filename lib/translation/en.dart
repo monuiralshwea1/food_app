@@ -52,6 +52,8 @@ final Map<String, String> enTranslations = {
   'offers': 'Offers',
   'combo_meals': 'Combo Meals',
   'kids_menu': 'Kids Menu',
+  'meal categories':'meal categories',
+  'category':'category',
 
   // الطلب والدفع
   'Add to Cart': 'Add to Cart',

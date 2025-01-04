@@ -36,7 +36,9 @@ class MealItemList extends GetView<MealItemController> {
           itemCount: controller.mealItems.length,
           itemBuilder: (context, index) {
             final mealItem = controller.mealItems[index];
-            return MealItemCard(mealItem: mealItem,);
+            return GestureDetector(child: MealItemCard(mealItem: mealItem,),onTap:(){
+              controller.fetchMealsFromItem(mealItem.id);
+            },);
           },
         ),
       );

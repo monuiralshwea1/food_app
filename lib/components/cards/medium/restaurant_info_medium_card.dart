@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:foodly_ui/model/category.dart';
 
@@ -24,26 +23,31 @@ class RestaurantInfoMediumCard extends StatelessWidget {
       child: SizedBox(
         width: 200,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AspectRatio(
               aspectRatio: 1.25,
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
-                child:category.image!=null? CachedNetworkImage(
-                  imageUrl: category.image!,
-                  placeholder: (context, url) => const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                  fit:BoxFit.cover,
-                ):SizedBox.fromSize(),
+                 child:category.image!=null? Image.network(
+                    category.image.toString(),
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset('assets/images/featured_items_3.png', fit: BoxFit.cover);
+                    },
+                  ):Image.asset('assets/images/featured _items_3.png', fit: BoxFit.cover),
               ),
             ),
             const SizedBox(height: defaultPadding / 2),
             Text(
-              category.name!,
+              category.name.toString(),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.titleMedium,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
             ),
 
           ],

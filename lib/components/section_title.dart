@@ -24,7 +24,7 @@ class SectionTitle extends StatelessWidget {
         children: [
           Text(
           //  isMainSection ? title : title.toUpperCase(),
-            title.toUpperCase(),
+            title,
             style: //isMainSection
               //  ? Theme.of(context).textTheme.titleLarge
                // : Theme.of(context).textTheme.titleMedium,
