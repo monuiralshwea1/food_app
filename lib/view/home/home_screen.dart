@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodly_ui/controller/meal_iem_controller.dart';
+import 'package:foodly_ui/view/home/components/meal_card.dart';
 import '../../components/app_drawer.dart';
 import '../../components/cards/big/big_card_image_slide.dart';
 import '../../components/cards/big/restaurant_info_big_card.dart';
@@ -13,7 +14,6 @@ import 'package:get/get.dart';
 
 import 'components/promotion_banner.dart';
 
-
 class HomeScreen extends GetView<MealItemController> {
   const HomeScreen({super.key});
 
@@ -23,7 +23,7 @@ class HomeScreen extends GetView<MealItemController> {
       drawer: const AppDrawer(),
       appBar: AppBar(
         leading: const SizedBox(),
-        title:  Column(
+        title: Column(
           children: [
             Text(
               "Valley Restaurants".tr,
@@ -43,44 +43,58 @@ class HomeScreen extends GetView<MealItemController> {
                 child: BigCardImageSlide(images: demoBigImages),
               ),
               const SizedBox(height: defaultPadding * 2),
-               SectionTitle(
+              SectionTitle(
                 title: "category".tr,
                 //press: () =>    Get.toNamed(ScreenName.featuredScreen),
               ),
               const SizedBox(height: defaultPadding),
-               MediumCardList(),
+              MediumCardList(),
               const SizedBox(height: 1),
               // Banner
               //const PromotionBanner(),
-               SectionTitle(
-
+              SectionTitle(
                 title: 'meal categories'.tr,
-             //   press: () =>    Get.toNamed(ScreenName.featuredScreen),
+                //   press: () =>    Get.toNamed(ScreenName.featuredScreen),
               ),
-               const MealItemList(),
+              const MealItemList(),
               const SizedBox(height: 20),
-             // SectionTitle(title: "All Restaurants", press: () {}),
+              // SectionTitle(title: "All Restaurants", press: () {}),
               const SizedBox(height: 16),
 
               // Demo list of Big Cards
-              // Obx((){
-              //   return ListView.builder(
-              //   itemCount: controller.meals.length, itemBuilder: (context, index)=> Padding(
-              //   padding: const EdgeInsets.fromLTRB(
-              //   defaultPadding, 0, defaultPadding, defaultPadding),
-              //   child: RestaurantInfoBigCard(
-              //   // Images are List<String>
-              //   images: demoBigImages..shuffle(),
-              //   name: "McDonald's",
-              //   rating: 4.3,
-              //   numOfRating: 200,
-              //   deliveryTime: 25,
-              //   foodType: const ["Chinese", "American", "Deshi food"],
-              //   press: () =>    Get.toNamed(ScreenName.detailsScreen),
-              //   ),
-              //   ),
-              //   );
-              // }),
+              Obx(() {
+                if (controller.islodingMeal.value) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (controller.erroMeals.isNotEmpty) {
+                  return Center(child: Text(controller.erroMeals.value));
+                }
+
+                if (controller.meals.isEmpty) {
+                  return const Center(child: Text("No meals available"));
+                }
+
+                return SizedBox(
+                  height: 400,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: controller.meals.length,
+                    itemBuilder: (context, index) {
+                      final meal = controller.meals[index];
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                            defaultPadding, 0, defaultPadding, defaultPadding),
+                        child: MealCard(
+                          meal: meal,
+                          onPressed: () {},
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }),
             ],
           ),
         ),
