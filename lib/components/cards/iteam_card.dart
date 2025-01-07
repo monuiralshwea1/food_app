@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../constants.dart';
 
@@ -10,13 +12,13 @@ class ItemCard extends StatelessWidget {
     required this.title,
     required this.description,
     required this.image,
-    required this.foodType,
+
     required this.price,
-    required this.priceRange,
+    //required this.priceRange,
     required this.press,
   });
 
-  final String? title, description, image, foodType, priceRange;
+  final String? title, description, image; //priceRange;
   final double? price;
   final VoidCallback press;
 
@@ -39,9 +41,22 @@ class ItemCard extends StatelessWidget {
                 aspectRatio: 1,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  child: Image.asset(
-                    image!,
+                  child:Image.network(
+                    image.toString(),
+                    height: 180,
+                    width: double.infinity,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        height: 180,
+                        color: Colors.grey[200],
+                        child: const Icon(
+                          Icons.restaurant,
+                          size: 50,
+                          color: Colors.grey,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
@@ -60,7 +75,7 @@ class ItemCard extends StatelessWidget {
                           .copyWith(fontSize: 18),
                     ),
                     Text(
-                      description!,
+                      description??'',
                       style: Theme.of(context).textTheme.bodyMedium,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -68,23 +83,39 @@ class ItemCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          priceRange!,
-                          style: textStyle,
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: defaultPadding / 2),
-                          child: SmallDot(),
-                        ),
-                        Text(foodType!, style: textStyle),
-                        const Spacer(),
-                        Text(
                           "USD$price",
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge!
                               .copyWith(color: primaryColor),
-                        )
+                        ),
+                        const Spacer(),
+                        SizedBox(
+                          width: 20.w,
+                          height: 5.h,// Fixed width for the button
+                          child: ElevatedButton(
+                            onPressed: (){},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                            ),
+                            child:  Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(Icons.add_shopping_cart, size: 18),
+                                const SizedBox(width: 4),
+                                Text('Add'.tr),
+                              ],
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ],

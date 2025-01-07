@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:foodly_ui/controller/meal_iem_controller.dart';
+import 'package:foodly_ui/model/meal.dart';
 import 'package:foodly_ui/view/home/components/meal_card.dart';
+import 'package:sizer/sizer.dart';
 import '../../components/app_drawer.dart';
 import '../../components/cards/big/big_card_image_slide.dart';
 import '../../components/cards/big/restaurant_info_big_card.dart';
+import '../../components/scalton/medium_card_scalton.dart';
 import '../../components/section_title.dart';
 import '../../constants.dart';
 import '../../demo_data.dart';
 import '../../route/RoutingPage.dart';
+import '../details/components/iteams.dart';
 import 'components/meal_item_list.dart';
 import 'components/medium_card_list.dart';
 import 'package:get/get.dart';
@@ -22,7 +26,6 @@ class HomeScreen extends GetView<MealItemController> {
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(
-        leading: const SizedBox(),
         title: Column(
           children: [
             Text(
@@ -64,7 +67,7 @@ class HomeScreen extends GetView<MealItemController> {
               // Demo list of Big Cards
               Obx(() {
                 if (controller.islodingMeal.value) {
-                  return const Center(child: CircularProgressIndicator());
+                  return buildFeaturedPartnersLoadingIndicator();
                 }
 
                 if (controller.erroMeals.isNotEmpty) {
@@ -76,26 +79,43 @@ class HomeScreen extends GetView<MealItemController> {
                 }
 
                 return SizedBox(
-                  height: 400,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: controller.meals.length,
-                    itemBuilder: (context, index) {
-                      final meal = controller.meals[index];
-                      return Padding(
-                        padding: const EdgeInsets.fromLTRB(
-                            defaultPadding, 0, defaultPadding, defaultPadding),
-                        child: MealCard(
-                          meal: meal,
-                          onPressed: () {},
-                        ),
-                      );
-                    },
-                  ),
+                 // height: 400.h,
+                  width: 200.w,
+                  child:  Items(meals: controller.meals,),
+                  // ListView.builder(
+                  //   shrinkWrap: true,
+                  //   physics: const ClampingScrollPhysics(),
+                  //   itemCount: controller.meals.length,
+                  //   itemBuilder: (context, index) {
+                  //     Meal meal = controller.meals[index];
+                  //
+                  //     return Padding(
+                  //       padding: const EdgeInsets.fromLTRB(
+                  //           defaultPadding, 0, defaultPadding, defaultPadding),
+                  //       child: MealCard(
+                  //         meal: meal,
+                  //         onPressed: () {},
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
                 );
               }),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+  SingleChildScrollView buildFeaturedPartnersLoadingIndicator() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(
+          2,
+              (index) => const Padding(
+            padding: EdgeInsets.only(left: defaultPadding),
+            child: MediumCardScalton(),
           ),
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodly_ui/controller/category_controller.dart';
+import 'package:foodly_ui/route/RoutingPage.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../components/cards/medium/restaurant_info_medium_card.dart';
@@ -47,14 +48,7 @@ class MediumCardList extends GetView<CategoryController> {
                 ),
                 child: RestaurantInfoMediumCard(
                    category: controller.categorys[index],
-                  press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const DetailsScreen(),
-                      ),
-                    );
-                  },
+                  press: ()=>Get.toNamed(ScreenName.mealScreen, arguments: {'category_id': controller.categorys[index].id}),
                 ),
               ),
             );

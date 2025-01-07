@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../models/meal.dart';
-import '../../../constants.dart';
-
+import '../../../model/meal.dart';
+import 'package:get/get.dart';
 class MealCard extends StatelessWidget {
   final Meal meal;
   final VoidCallback onPressed;
@@ -29,7 +28,7 @@ class MealCard extends StatelessWidget {
             ClipRRect(
               borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
               child: Image.network(
-                meal.image,
+                meal.image.toString(),
                 height: 180,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -77,21 +76,30 @@ class MealCard extends StatelessWidget {
                         ),
                       ),
                       // Add Button
-                      ElevatedButton.icon(
-                        onPressed: onPressed,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                      SizedBox(
+                        width: 100, // Fixed width for the button
+                        child: ElevatedButton(
+                          onPressed: onPressed,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
                           ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
+                          child:  Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.add_shopping_cart, size: 18),
+                              const SizedBox(width: 4),
+                              Text('Add'.tr),
+                            ],
                           ),
                         ),
-                        icon: const Icon(Icons.add_shopping_cart, size: 18),
-                        label: const Text('Add'),
                       ),
                     ],
                   ),

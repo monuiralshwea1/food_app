@@ -39,7 +39,7 @@ class DetailsScreen extends StatelessWidget {
               RestaurantInfo(),
               SizedBox(height: defaultPadding),
               FeaturedItems(),
-              Items(),
+             // Items(),
             ],
           ),
         ),

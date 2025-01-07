@@ -2,7 +2,7 @@ class Meal {
   int? id;
   String name;
   String? description;
-  int price;
+  double price;
   String? image;
 
 
@@ -20,8 +20,8 @@ class Meal {
     return Meal(
       id: int.parse(json['id'].toString()), // Handle potential string IDs
       name: json['name'] as String,
-      image: json['image'] as String?,
-      price:  int.parse(json['price'].toString()),
+       image: json['image'] as String?,
+       price: double.parse(json['price'].toString()),
       description: json['description'] as String?,
     );
   }

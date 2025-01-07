@@ -1,83 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:foodly_ui/model/meal.dart';
 import '../../../components/cards/iteam_card.dart';
 import '../../../constants.dart';
 import '../../addToOrder/add_to_order_screen.dart';
 
+class Items extends StatelessWidget {
+   List<Meal>meals;
+   Items({
+    super.key,
+    required this.meals
+  });
 
-class Items extends StatefulWidget {
-  const Items({super.key});
 
-  @override
-  State<Items> createState() => _ItemsState();
-}
-
-class _ItemsState extends State<Items> {
-  
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        DefaultTabController(
-          length: demoTabs.length,
-          child: TabBar(
-            isScrollable: true,
-            unselectedLabelColor: titleColor,
-            labelStyle: Theme.of(context).textTheme.titleLarge,
-            onTap: (value) {
-              // you will get selected tab index
-            },
-            tabs: demoTabs,
-          ),
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const ClampingScrollPhysics(),//const NeverScrollableScrollPhysics(),
+      itemCount: meals.length,
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: defaultPadding,
+          vertical: defaultPadding / 2,
         ),
-        // SizedBox(height: defaultPadding),
-        ...List.generate(
-          demoData.length,
-          (index) => Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: defaultPadding, vertical: defaultPadding / 2),
-            child: ItemCard(
-              title: demoData[index]["title"],
-              description: demoData[index]["description"],
-              image: demoData[index]["image"],
-              foodType: demoData[index]['foodType'],
-              price: demoData[index]["price"],
-              priceRange: demoData[index]["priceRange"],
-              press: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const AddToOrderScrreen(),
-                ),
-              ),
+        child: ItemCard(
+          title: meals[index].name,
+          description:meals[index].description,
+          image: meals[index].image,
+        //  foodType: demoData[index]['foodType'],
+          price: meals[index].price,
+          //priceRange: demoData[index]["priceRange"],
+          press: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddToOrderScrreen(),
             ),
           ),
         ),
-      ],
+      ),
     );
   }
+
 }
 
-final List<Tab> demoTabs = <Tab>[
-  const Tab(
-    child: Text('Most Populars'),
-  ),
-  const Tab(
-    child: Text('Beef & Lamb'),
-  ),
-  const Tab(
-    child: Text('Seafood'),
-  ),
-  const Tab(
-    child: Text('Appetizers'),
-  ),
-  const Tab(
-    child: Text('Dim Sum'),
-  ),
-];
-
 final List<Map<String, dynamic>> demoData = List.generate(
-  3,
-  (index) => {
+  5,
+      (index) => {
     "image": "assets/images/featured _items_${index + 1}.png",
     "title": "Cookie Sandwich",
     "description": "Shortbread, chocolate turtle cookies, and red velvet.",

@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:foodly_ui/controller/meal_iem_controller.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../../components/cards/meal_item_card.dart';
 import '../../../components/scalton/medium_card_scalton.dart';
 import '../../../constants.dart';
-
-
 
 class MealItemList extends GetView<MealItemController> {
   const MealItemList({super.key});
@@ -16,14 +13,14 @@ class MealItemList extends GetView<MealItemController> {
   Widget build(BuildContext context) {
     return Obx(() {
       if (controller.isLoading.value) {
-         return buildFeaturedPartnersLoadingIndicator();//SizedBox(
+        return buildFeaturedPartnersLoadingIndicator(); //SizedBox(
         //   height: 10.h,
         //   child: const Center(child: CircularProgressIndicator()),
         // );
       }
 
       if (controller.error.isNotEmpty) {
-         return SizedBox(
+        return SizedBox(
           height: 10.h,
           child: Center(child: Text(controller.error.value)),
         );
@@ -36,9 +33,14 @@ class MealItemList extends GetView<MealItemController> {
           itemCount: controller.mealItems.length,
           itemBuilder: (context, index) {
             final mealItem = controller.mealItems[index];
-            return GestureDetector(child: MealItemCard(mealItem: mealItem,),onTap:(){
-              controller.fetchMealsFromItem(mealItem.id);
-            },);
+            return GestureDetector(
+              child: MealItemCard(
+                mealItem: mealItem,
+              ),
+              onTap: () {
+                controller.fetchMealsFromItem(mealItem.id);
+              },
+            );
           },
         ),
       );
@@ -51,7 +53,7 @@ class MealItemList extends GetView<MealItemController> {
       child: Row(
         children: List.generate(
           2,
-              (index) => const Padding(
+          (index) => const Padding(
             padding: EdgeInsets.only(left: defaultPadding),
             child: MediumCardScalton(),
           ),
@@ -59,7 +61,4 @@ class MealItemList extends GetView<MealItemController> {
       ),
     );
   }
-
-
 }
-
