@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:foodly_ui/route/RoutingPage.dart'; // تأكد من صحة المسار
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'binding.dart';
 import 'constants.dart';
 import 'translation/translation_service.dart';
 import 'package:sizer/sizer.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   runApp(const MyApp());
 }
 

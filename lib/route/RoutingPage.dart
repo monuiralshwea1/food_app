@@ -7,6 +7,7 @@ import 'package:foodly_ui/view/home/home_screen.dart';
 
 import '../view/auth/sign_in_screen.dart';
 import '../view/auth/sign_up_screen.dart';
+import '../view/cart/cart_screen.dart';
 import '../view/details/details_screen.dart';
 import '../view/featured/featurred_screen.dart';
 import '../view/splach_screen.dart';
@@ -23,6 +24,8 @@ class ScreenName{
   static const String SingUpScreen = "/SingUpScreen";
   static const String SinginScreen = "/SingInScreen";
   static const String mealScreen= "/mealScreen";
+  static const String cartScreen= "/cartScreen";
+
 
 }
 class RoutingPage{
@@ -35,7 +38,8 @@ class RoutingPage{
     GetPage(name: ScreenName.detailsScreen, page: () => const DetailsScreen()),
     GetPage(name: ScreenName.SingUpScreen, page: () => const SignUpScreen()),
     GetPage(name: ScreenName.SinginScreen, page: () => const SignInScreen()),
-    GetPage(name: ScreenName.mealScreen, page: () => const MealScreen()),
+    GetPage(name: ScreenName.mealScreen, page: () =>  const MealScreen()),
+    GetPage(name: ScreenName.cartScreen, page: () =>  const CartScreen()),
 
     ];
 

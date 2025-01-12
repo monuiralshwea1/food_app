@@ -6,7 +6,7 @@ class DioClient {
   final Dio _dio = Dio();
   final StorageService _storageService;
 
-  static const String baseUrl = 'http://192.168.1.221:8000/api';
+  static const String baseUrl = 'http://192.168.1.134:8000/api';
 
   DioClient(this._storageService) {
     _dio.options.baseUrl = baseUrl;
@@ -18,8 +18,14 @@ class DioClient {
     return InterceptorsWrapper(
       onRequest: (options, handler) async {
         final token = await _storageService.getToken();
+        print(token);
         if (token != null) {
-          options.headers['Authorization'] = 'Bearer $token';
+          options.headers['auth-token'] = token;
+          options.headers['Content-Type'] = 'application/json';
+          options.headers['Accept'] = '*/*';
+          // options.validateStatus=(status) {
+          //   return status! < 500; // السماح بالتعامل مع الأكواد الأقل من 500
+          // };
         }
         return handler.next(options);
       },
@@ -42,10 +48,11 @@ class DioClient {
 
   Future<Response> post(String path, {dynamic data}) async {
     try {
+
       final response = await _dio.post(path, data: data);
       return response;
     } on DioException catch (e) {
-      throw _handleError(e);
+     throw _handleError(e);
     }
   }
 

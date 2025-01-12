@@ -46,4 +46,20 @@ class AuthRepository {
   Future<void> logout() async {
     await _storageService.deleteToken();
   }
+
+
+  Future<void> profile() async {
+    try {
+      final response = await _dioClient.get('/customers/profile');
+      if (response.data['status'] == true) {
+        print(response);
+      }
+      throw Exception(response.data['msg'] ?? 'Failed to load meal items');
+    } catch (e) {
+      throw Exception('Failed to load meal items: $e');
+    }
+  }
+
+
+
 }

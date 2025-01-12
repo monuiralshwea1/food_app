@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodly_ui/controller/meal_iem_controller.dart';
+import 'package:foodly_ui/model/meal_item.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../../components/cards/meal_item_card.dart';
@@ -25,7 +26,6 @@ class MealItemList extends GetView<MealItemController> {
           child: Center(child: Text(controller.error.value)),
         );
       }
-
       return SizedBox(
         height: 10.h,
         child: ListView.builder(

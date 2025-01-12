@@ -44,6 +44,7 @@ final Map<String, String> arTranslations = {
 
 
   // الأقسام الخاصة بالطعام
+  'All':'الكل',
   'appetizers': 'المقبلات',
   'main_course': 'الأطباق الرئيسية',
   'desserts': 'الحلويات',

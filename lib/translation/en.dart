@@ -43,6 +43,7 @@ final Map<String, String> enTranslations = {
   'Arabic': 'Arabic',
 
   // الأقسام الخاصة بالطعام
+  'All':'All',
   'appetizers': 'Appetizers',
   'main_course': 'Main Course',
   'desserts': 'Desserts',

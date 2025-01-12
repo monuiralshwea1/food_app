@@ -34,6 +34,18 @@ class HomeScreen extends GetView<MealItemController> {
             )
           ],
         ),
+          actions: [
+      Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: CircleAvatar(
+        backgroundColor: Colors.black.withOpacity(0.05),
+        child: IconButton(
+          icon: const Icon(Icons.shopping_cart, color: Colors.black87),
+          onPressed: () =>  Get.toNamed(ScreenName.cartScreen),
+        ),
+      ),
+    ),
+    ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(

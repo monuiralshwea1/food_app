@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
+import '../../../model/meal.dart';
 
 class MealListItem extends StatelessWidget {
-  final String title;
-  final String? description;
-  final String? image;
-  final double price;
+  final Meal meal;
   final VoidCallback press;
 
   const MealListItem({
     Key? key,
-    required this.title,
-    this.description,
-    this.image,
-    required this.price,
+    required this.meal,
     required this.press,
   }) : super(key: key);
 
@@ -26,165 +21,88 @@ class MealListItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 10,
-            offset: const Offset(0, 3),
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
       child: Material(
         color: Colors.transparent,
+        borderRadius: BorderRadius.circular(15),
         child: InkWell(
           onTap: press,
           borderRadius: BorderRadius.circular(15),
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Meal Image
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: image != null
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
+                child: AspectRatio(
+                  aspectRatio: 1.3,
+                  child: meal.image != null
                       ? Image.network(
-                          image!,
-                          width: 120,
-                          height: 120,
+                          meal.image!,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              _buildPlaceholder(),
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey[200],
+                              child: const Icon(
+                                Icons.restaurant,
+                                color: Colors.grey,
+                                size: 40,
+                              ),
+                            );
+                          },
                         )
-                      : _buildPlaceholder(),
+                      : Container(
+                          color: Colors.grey[200],
+                          child: const Icon(
+                            Icons.restaurant,
+                            color: Colors.grey,
+                            size: 40,
+                          ),
+                        ),
                 ),
-                const SizedBox(width: 16),
-                // Meal Details
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Title
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      meal.name,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    if (meal.description != null) ...[
                       Text(
-                        title,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
+                        meal.description!,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Colors.grey[600],
+                            ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 8),
-                      // Description
-                      if (description != null && description!.isNotEmpty)
-                        Text(
-                          description!,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[600],
-                            height: 1.3,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      const SizedBox(height: 12),
-                      // Price Row
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 6,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.green.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Text(
-                              '\$${price.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green,
-                              ),
-                            ),
-                          ),
-                          const Spacer(),
-                          // Add Button
-                          Container(
-                            height: 35,
-                            decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                onTap: press,
-                                borderRadius: BorderRadius.circular(20),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                    vertical: 8,
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(
-                                        Icons.add_shopping_cart,
-                                        size: 18,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(width: 4),
-                                      Text(
-                                        'Add',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      const SizedBox(height: 4),
                     ],
-                  ),
+                    Text(
+                      '${meal.price} ر.س',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: primaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildPlaceholder() {
-    return Container(
-      width: 120,
-      height: 120,
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.restaurant,
-            size: 40,
-            color: Colors.grey[400],
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'No Image',
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey[500],
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:foodly_ui/binding.dart';
 import 'package:foodly_ui/model/meal.dart';
+import 'package:get/get.dart';
 import '../../../components/cards/iteam_card.dart';
 import '../../../constants.dart';
 import '../../addToOrder/add_to_order_screen.dart';
@@ -30,12 +32,9 @@ class Items extends StatelessWidget {
         //  foodType: demoData[index]['foodType'],
           price: meals[index].price,
           //priceRange: demoData[index]["priceRange"],
-          press: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const AddToOrderScrreen(),
-            ),
+          press: () => Get.to(AddToOrderScreen(meal: meals[index]),
           ),
+
         ),
       ),
     );
@@ -43,14 +42,3 @@ class Items extends StatelessWidget {
 
 }
 
-final List<Map<String, dynamic>> demoData = List.generate(
-  5,
-      (index) => {
-    "image": "assets/images/featured _items_${index + 1}.png",
-    "title": "Cookie Sandwich",
-    "description": "Shortbread, chocolate turtle cookies, and red velvet.",
-    "price": 7.4,
-    "foodType": "Chinese",
-    "priceRange": "\$" * 2,
-  },
-);

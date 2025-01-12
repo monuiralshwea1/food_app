@@ -15,6 +15,7 @@ class MealItemController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    fetchMealsFromItem(0);
     fetchMealItems();
   }
 
@@ -24,6 +25,7 @@ class MealItemController extends GetxController {
       error.value = '';
       final items = await _mealItemRepository.getMealItems();
       mealItems.assignAll(items);
+      mealItems.insert(0, MealItem(id: 0, name: 'All'.tr));
     } catch (e) {
       error.value = e.toString();
     } finally {
