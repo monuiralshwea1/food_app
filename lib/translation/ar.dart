@@ -56,6 +56,7 @@ final Map<String, String> arTranslations = {
   'kids_menu': 'قائمة الأطفال',
   'meal categories':'اصناف الوجبات',
   'category':'الاصناف',
+  'meals':'الوجبات',
   'Add':'اضافة',
 
   // الطلب والدفع

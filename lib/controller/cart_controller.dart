@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import '../core/storge/storage_service.dart';
 import '../model/Order.dart';
 import '../model/cart_item.dart';
 import '../model/meal.dart';
 import '../repositories/order_repositorie.dart';
+import '../route/RoutingPage.dart';
 
 
 class CartController extends GetxController {
@@ -135,6 +137,30 @@ class CartController extends GetxController {
     try {
       isLoading.value = true;
 
+      // التحقق من وجود التوكن
+      final storageService = Get.find<StorageService>();
+      final token = await storageService.getToken();
+
+      if (token == null) {
+        Get.snackbar(
+          'تنبيه',
+          'يجب تسجيل الدخول أولاً',
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
+        );
+
+        // الانتقال إلى صفحة تسجيل الدخول
+        final result = await Get.toNamed(ScreenName.SinginScreen);
+
+        // إذا لم يتم تسجيل الدخول بنجاح
+        if (result != true) {
+          return false;
+        }
+
+        // إعادة المحاولة بعد تسجيل الدخول
+        return placeOrder();
+      }
+
       if (cartItems.isEmpty) {
         Get.snackbar(
           'تنبيه',
@@ -149,7 +175,7 @@ class CartController extends GetxController {
         'details_id': item.details_id,
         'price': item.price,
         'qty': item.quantity,
-        'flage': 1,
+        'flage': 0,
       }).toList();
 
       final orderData = OrderModel(
@@ -159,6 +185,7 @@ class CartController extends GetxController {
       );
 
       final response = await submitPlaceOrder(orderData);
+
       if (response['status'] == true) {
         clearCart();
         Get.snackbar(
@@ -178,6 +205,22 @@ class CartController extends GetxController {
       );
       return false;
     } catch (e) {
+      if (e.toString().contains('401')) {
+        // إذا كان الخطأ 401 (غير مصرح)
+        final storageService = Get.find<StorageService>();
+        await storageService.deleteToken(); // حذف التوكن
+
+        Get.snackbar(
+          'تنبيه',
+          'انتهت صلاحية الجلسة، يرجى تسجيل الدخول مرة أخرى',
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
+        );
+
+        Get.offAllNamed(ScreenName.SinginScreen);
+        return false;
+      }
+
       Get.snackbar(
         'خطأ',
         'حدث خطأ في الاتصال بالخادم',

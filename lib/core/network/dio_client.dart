@@ -6,7 +6,7 @@ class DioClient {
   final Dio _dio = Dio();
   final StorageService _storageService;
 
-  static const String baseUrl = 'http://192.168.1.134:8000/api';
+  static const String baseUrl = 'http://192.168.1.221:8000/api';
 
   DioClient(this._storageService) {
     _dio.options.baseUrl = baseUrl;
@@ -18,7 +18,6 @@ class DioClient {
     return InterceptorsWrapper(
       onRequest: (options, handler) async {
         final token = await _storageService.getToken();
-        print(token);
         if (token != null) {
           options.headers['auth-token'] = token;
           options.headers['Content-Type'] = 'application/json';

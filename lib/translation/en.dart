@@ -54,6 +54,7 @@ final Map<String, String> enTranslations = {
   'combo_meals': 'Combo Meals',
   'kids_menu': 'Kids Menu',
   'meal categories':'meal categories',
+  'meals':'meals',
   'category':'category',
   'Add':'Add',
 
