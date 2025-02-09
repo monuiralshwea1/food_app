@@ -11,7 +11,6 @@ class PromotionBanner extends StatefulWidget {
 }
 
 class _PromotionBannerState extends State<PromotionBanner> {
-  
   bool isLoading = true;
   @override
   void initState() {

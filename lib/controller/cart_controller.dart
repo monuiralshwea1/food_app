@@ -47,14 +47,14 @@ class CartController extends GetxController {
 
   void addToCart(Meal meal, int quantity) {
     try {
-      final existingIndex = cartItems.indexWhere((item) => item.details_id == meal.id);
+      final existingIndex = cartItems.indexWhere((item) => item.meal_id == meal.id);
       if (existingIndex >= 0) {
         cartItems[existingIndex].quantity += quantity;
         cartItems.refresh();
       } else {
         cartItems.add(
           CartItem(
-            details_id: meal.id!,
+            meal_id: meal.id!,
             mealName: meal.name,
             price: meal.price,
             quantity: quantity,
@@ -82,7 +82,7 @@ class CartController extends GetxController {
 
   void removeFromCart(int mealId) {
     try {
-      cartItems.removeWhere((item) => item.details_id == mealId);
+      cartItems.removeWhere((item) => item.meal_id == mealId);
       calculateTotal();
       saveCartToStorage(); // حفظ بعد حذف عنصر
       Get.snackbar(
@@ -103,7 +103,7 @@ class CartController extends GetxController {
 
   void updateQuantity(int mealId, int quantity) {
     try {
-      final index = cartItems.indexWhere((item) => item.details_id == mealId);
+      final index = cartItems.indexWhere((item) => item.meal_id == mealId);
       if (index != -1) {
         if (quantity > 0) {
           cartItems[index].quantity = quantity;
@@ -172,10 +172,10 @@ class CartController extends GetxController {
       }
 
       final orderDetails = cartItems.map((item) => {
-        'details_id': item.details_id,
-        'price': item.price,
+        'meal_id': item.meal_id,
+        //'price': item.price,
         'qty': item.quantity,
-        'flage': 0,
+        //'flage': 0,
       }).toList();
 
       final orderData = OrderModel(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodly_ui/controller/meal_iem_controller.dart';
 import 'package:foodly_ui/model/meal.dart';
 import 'package:foodly_ui/view/home/components/meal_card.dart';
+import 'package:foodly_ui/view/home/components/offer_list.dart';
 import 'package:sizer/sizer.dart';
 import '../../components/app_drawer.dart';
 import '../../components/cards/big/big_card_image_slide.dart';
@@ -57,6 +58,9 @@ class HomeScreen extends GetView<MealItemController> {
                 padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
                 child: BigCardImageSlide(images: demoBigImages),
               ),
+              const SizedBox(height: defaultPadding),
+              SectionTitle(title: "عروض خاصة"),
+              OfferList(),
               const SizedBox(height: defaultPadding * 2),
               SectionTitle(
                 title: "category".tr,

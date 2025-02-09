@@ -39,9 +39,9 @@ class CartScreen extends GetView<CartController> {
                 itemBuilder: (context, index) {
                   final item = controller.cartItems[index];
                   return Dismissible(
-                    key: Key(item.details_id.toString()),
+                    key: Key(item.meal_id.toString()),
                     direction: DismissDirection.endToStart,
-                    onDismissed: (_) => controller.removeFromCart(item.details_id),
+                    onDismissed: (_) => controller.removeFromCart(item.meal_id),
                     background: Container(
                       alignment: Alignment.centerRight,
                       padding: const EdgeInsets.only(right: 20),
@@ -91,7 +91,7 @@ class CartScreen extends GetView<CartController> {
                                 IconButton(
                                   icon: const Icon(Icons.remove_circle_outline),
                                   onPressed: () => controller.updateQuantity(
-                                      item.details_id, item.quantity - 1),
+                                      item.meal_id, item.quantity - 1),
                                 ),
                                 Text(
                                   '${item.quantity}',
@@ -103,7 +103,7 @@ class CartScreen extends GetView<CartController> {
                                 IconButton(
                                   icon: const Icon(Icons.add_circle_outline),
                                   onPressed: () => controller.updateQuantity(
-                                      item.details_id, item.quantity + 1),
+                                      item.meal_id, item.quantity + 1),
                                 ),
                               ],
                             ),

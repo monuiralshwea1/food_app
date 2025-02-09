@@ -1,8 +1,10 @@
 import 'package:foodly_ui/controller/category_controller.dart';
 import 'package:foodly_ui/controller/meal_iem_controller.dart';
+import 'package:foodly_ui/controller/offer_controller.dart';
 import 'package:foodly_ui/repositories/auth_repositorie.dart';
 import 'package:foodly_ui/repositories/category_repositorie.dart';
 import 'package:foodly_ui/repositories/meal_item_repositorie.dart';
+import 'package:foodly_ui/repositories/offer_repositorie.dart';
 import 'package:foodly_ui/repositories/order_repositorie.dart';
 import 'package:get/get.dart';
 import 'controller/auth/sing_controller.dart';
@@ -29,6 +31,8 @@ class Binding extends Bindings{
     Get.lazyPut(() => CategoryController(Get.find<CategoryRepository>()),fenix:true);
     Get.lazyPut(()=>OrderRepository(Get.find<DioClient>()),fenix:true);
     Get.lazyPut(() => CartController(Get.find<OrderRepository>()),fenix:true);
+    Get.lazyPut(() => OfferRepository(Get.find<DioClient>()),fenix:true);
+    Get.lazyPut(()=>OfferController(Get.find<OfferRepository>()),fenix: true);
 
 
 

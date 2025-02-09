@@ -1,25 +1,25 @@
 class OrderDetails {
   final int mealId;
   final String mealName;
-  final double price;
+ // final double price;
   final int qty;
   final String image;
-  final int flag;
+ // final int flag;
 
   OrderDetails({
     required this.mealId,
     required this.mealName,
-    required this.price,
+  //  required this.price,
     required this.qty,
     required this.image,
-    this.flag = 1,
+  //  this.flag = 1,
   });
 
   Map<String, dynamic> toJson() => {
     'meal_id': mealId,
-    'price': price,
+    //'price': price,
     'qty': qty,
-    'flage': flag,
+    //'flage': flag,
   };
 }
 
