@@ -27,7 +27,7 @@ class MealItemList extends GetView<MealItemController> {
         );
       }
       return SizedBox(
-        height: 10.h,
+        height: 11.h,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: controller.mealItems.length,

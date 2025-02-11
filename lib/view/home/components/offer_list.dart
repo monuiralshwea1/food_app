@@ -65,7 +65,7 @@ class OfferList extends GetView<OfferController> {
                               Row(
                                 children: [
                                   Text(
-                                    "${offer.originalPrice} ج.م",
+                                    "${offer.originalPrice}YER",
                                     style: const TextStyle(
                                       fontSize: 14,
                                       decoration: TextDecoration.lineThrough,
@@ -74,7 +74,7 @@ class OfferList extends GetView<OfferController> {
                                   ),
                                   const SizedBox(width: 5),
                                   Text(
-                                    "${offer.discountedPrice} ج.م",
+                                    "${offer.discountedPrice}YER",
                                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.green),
                                   ),
                                 ],

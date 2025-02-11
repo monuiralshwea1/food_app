@@ -78,7 +78,7 @@ class HomeScreen extends GetView<MealItemController> {
               const MealItemList(),
               const SizedBox(height: 20),
               // SectionTitle(title: "All Restaurants", press: () {}),
-              const SizedBox(height: 16),
+             // const SizedBox(height: 16),
 
               // Demo list of Big Cards
               Obx(() {

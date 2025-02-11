@@ -80,7 +80,7 @@ class ItemCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "USD$price",
+                        "YER$price",
                         style: Theme.of(context)
                             .textTheme
                             .labelLarge!

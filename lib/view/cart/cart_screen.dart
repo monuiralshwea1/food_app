@@ -77,7 +77,7 @@ class CartScreen extends GetView<CartController> {
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
-                                    '${item.price} ر.س',
+                                    'YER${item.price}',
                                     style: const TextStyle(
                                       color: primaryColor,
                                       fontWeight: FontWeight.bold,
@@ -142,7 +142,7 @@ class CartScreen extends GetView<CartController> {
                           ),
                         ),
                         Obx(() => Text(
-                              '${controller.total.toStringAsFixed(2)} ر.س',
+                              '${controller.total.toStringAsFixed(2)} YER',
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
