@@ -65,7 +65,7 @@ class AppDrawer extends GetView<AppDrawerController> {
                   svgSrc: "assets/icons/marker.svg",
                   title: "Locations".tr,
                   subTitle: "Add or remove your delivery locations".tr,
-                  onTap: () {},
+                  onTap: () =>Get.toNamed(ScreenName.locationScreen),
                 ),
 
                 DrawerMenuItem(

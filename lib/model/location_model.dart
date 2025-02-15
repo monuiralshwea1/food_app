@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'dart:convert';
 
 @immutable
-class Location {
+class LocationModel {
   final int id;
   final int customerId;
   final String latitude;
@@ -13,7 +13,7 @@ class Location {
   final String createdAt;
   final String updatedAt;
 
-  const Location({
+  const LocationModel({
     required this.id,
     required this.customerId,
     required this.latitude,
@@ -25,8 +25,8 @@ class Location {
     required this.updatedAt,
   });
 
-  factory Location.fromJson(Map<String, dynamic> json) {
-    return Location(
+  factory LocationModel.fromJson(Map<String, dynamic> json) {
+    return LocationModel(
       id: json['id'],
       customerId: json['customer_id'],
       latitude: json['latitude'],

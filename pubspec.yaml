@@ -46,7 +46,9 @@ dependencies:
   sizer:
   sqflite:
   path: ^1.8.3
-
+  google_maps_flutter:
+  geocoding:
+  geolocator:
 dev_dependencies:
   flutter_test:
     sdk: flutter

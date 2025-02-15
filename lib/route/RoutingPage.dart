@@ -1,6 +1,7 @@
 //import 'package:food_app/view/entry_point.dart';
 //import 'package:food_app/view/home/home_screen.dart';
 import 'package:foodly_ui/view/Meal/meal_screen.dart';
+import 'package:foodly_ui/view/location/location_screen.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:foodly_ui/view/entry_point.dart';
 import 'package:foodly_ui/view/home/home_screen.dart';
@@ -23,6 +24,8 @@ class ScreenName {
   static const String SinginScreen = "/SingInScreen";
   static const String mealScreen = "/mealScreen";
   static const String cartScreen = "/cartScreen";
+  static const String locationScreen = "/locationScreen";
+
 }
 
 class RoutingPage {
@@ -42,6 +45,14 @@ class RoutingPage {
         AuthMiddleware(),
       ],
     ),
+    GetPage(
+      name: ScreenName.locationScreen,
+      page: () => const LocationScreen(),
+      middlewares: [
+        AuthMiddleware(),
+      ],
+    ),
+
   ];
 
   get getRout => _setPAges;
