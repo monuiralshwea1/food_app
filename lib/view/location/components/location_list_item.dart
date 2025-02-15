@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import '../../../controller/location_controller.dart';
 import '../../../model/location_model.dart';
 
 
-class LocationListItem extends StatelessWidget {
+class LocationListItem extends GetView<LocationController> {
   final LocationModel location;
 
   const LocationListItem({
@@ -21,10 +22,17 @@ class LocationListItem extends StatelessWidget {
         subtitle: Text(
           'Lat: ${location.latitude}, Long: ${location.longitude}',
         ),
-        trailing: Icon(
-          location.isAvailable ? Icons.check_circle : Icons.cancel,
-          color: location.isAvailable ? Colors.green : Colors.red,
-        ),
+        trailing: Obx(() => IconButton(
+          icon: Icon(
+            location.id == controller.activeLocationId.value
+                ? Icons.radio_button_checked
+                : Icons.radio_button_unchecked,
+            color: location.id == controller.activeLocationId.value
+                ? Colors.green
+                : Colors.grey,
+          ),
+          onPressed: () => controller.setActiveLocation(location.id),
+        )),
       ),
     );
   }

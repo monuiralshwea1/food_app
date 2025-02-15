@@ -45,4 +45,22 @@ class LocationRepository {
       throw Exception('Failed to add location: $e');
     }
   }
+
+  Future<void> updateLocationStatus(int locationId) async {
+    try {
+      final response = await _dioClient.post(
+        '/customers/updateLocationuest',
+        data: {
+          'id': locationId,
+        },
+      );
+
+      if (response.data['status'] == false) {
+        throw Exception(response.data['msg'] ?? 'Failed to update location status');
+      }
+    } catch (e) {
+      throw Exception('Failed to update location status: $e');
+    }
+  }
 }
+
