@@ -1,5 +1,6 @@
 //import 'package:food_app/view/entry_point.dart';
 //import 'package:food_app/view/home/home_screen.dart';
+import 'package:foodly_ui/binding.dart';
 import 'package:foodly_ui/view/Meal/meal_screen.dart';
 import 'package:foodly_ui/view/location/location_screen.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -7,6 +8,7 @@ import 'package:foodly_ui/view/entry_point.dart';
 import 'package:foodly_ui/view/home/home_screen.dart';
 
 import '../middleware/auth_mddleware.dart';
+import '../middleware/location_middleware.dart';
 import '../view/auth/sign_in_screen.dart';
 import '../view/auth/sign_up_screen.dart';
 import '../view/cart/cart_screen.dart';
@@ -50,6 +52,7 @@ class RoutingPage {
       page: () => const LocationScreen(),
       middlewares: [
         AuthMiddleware(),
+        LocationMiddleware(),
       ],
     ),
 

@@ -92,7 +92,7 @@ class AddToOrderScreen extends GetView<CartController> {
                         backgroundColor: const Color(0xFF4CAF50),
                         colorText: Colors.white,
                       );
-                      Get.back();
+                     // Get.back();
 
                     },
                     style: ElevatedButton.styleFrom(

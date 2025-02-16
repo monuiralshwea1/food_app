@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
 
+import '../constants.dart';
 import '../core/storge/storage_service.dart';
 import '../model/location_model.dart';
 import '../repositories/location_repository.dart';
@@ -66,7 +67,7 @@ class LocationController extends GetxController {
         Get.snackbar(
           'تنبيه',
           'يجب تسجيل الدخول أولاً',
-          backgroundColor: Colors.orange,
+          backgroundColor:accentColor,
           colorText: Colors.white,
         );
 
@@ -123,13 +124,14 @@ class LocationController extends GetxController {
 
       await fetchLocations();
 
-      Get.back();
+       Get.back();
       Get.snackbar(
         'Success'.tr,
         'Location added successfully'.tr,
         snackPosition: SnackPosition.BOTTOM,
       );
     } catch (e) {
+      //print(e.toString());
       error.value = e.toString();
       Get.snackbar(
         'Error'.tr,

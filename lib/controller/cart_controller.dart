@@ -47,6 +47,7 @@ class CartController extends GetxController {
 
   void addToCart(Meal meal, int quantity) {
     try {
+
       final existingIndex = cartItems.indexWhere((item) => item.meal_id == meal.id);
       if (existingIndex >= 0) {
         cartItems[existingIndex].quantity += quantity;
@@ -70,6 +71,7 @@ class CartController extends GetxController {
         backgroundColor: Colors.green,
         colorText: Colors.white,
       );
+      Get.toNamed(ScreenName.cartScreen);
     } catch (e) {
       Get.snackbar(
         'خطأ',

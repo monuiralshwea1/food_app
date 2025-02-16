@@ -37,7 +37,6 @@ class LocationRepository {
           'additional_details': additionalDetails,
         },
       );
-
       if (response.data['status'] == false) {
         throw Exception(response.data['msg']);
       }
