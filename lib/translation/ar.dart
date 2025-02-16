@@ -41,8 +41,13 @@ final Map<String, String> arTranslations = {
   'Language': 'اللغة',
   'English': 'الإنجليزية',
   'Arabic': 'العربية',
-
-
+  'My Locations':'موقعي',
+  'No locations added yet':'لم تتم إضافة أي مواقع بعد',
+  'Add New Location':'اضافة موقع جديد',
+  'selected':'تم اختياره',
+  'Tap on the map to select a location':'انقر على الخريطة لتحديد الموقع',
+  'Selected Address':'اختر العنووان',
+  'Confirm Location':'تاكيد الموقع',
   // الأقسام الخاصة بالطعام
   'All':'الكل',
   'appetizers': 'المقبلات',
@@ -79,6 +84,11 @@ final Map<String, String> arTranslations = {
   'Order Cancelled': 'تم إلغاء الطلب',
   'Out of Stock': 'غير متوفر',
   'New Notification': 'إشعار جديد',
+  'Success':'نجاح',
+  'Location added successfully':'تم اضافة الموقع  بنجاح',
+  'Error':'خطاء',
+  'Location updated successfully':'تم تحديث الموقع بنجاح',
+
 
   //واجهات الحساب
   'Account Settings':'اعداد الحسابات',

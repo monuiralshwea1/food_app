@@ -11,7 +11,7 @@ class LocationScreen extends GetView<LocationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Locations'),
+        title:  Text('My Locations'.tr),
         actions: [
           IconButton(
             icon: const Icon(Icons.add_location),
@@ -29,7 +29,7 @@ class LocationScreen extends GetView<LocationController> {
         }
 
         if (controller.locations.isEmpty) {
-          return const Center(child: Text('No locations added yet'));
+          return  Center(child: Text('No locations added yet'.tr));
         }
 
         return ListView.builder(
@@ -51,7 +51,7 @@ class AddLocationScreen extends GetView<LocationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add New Location'),
+        title:  Text('Add New Location'.tr),
       ),
       body: Stack(
         children: [
@@ -64,7 +64,7 @@ class AddLocationScreen extends GetView<LocationController> {
             markers: controller.selectedLocation.value != null
                 ? {
               Marker(
-                markerId: const MarkerId('selected'),
+                markerId:  MarkerId('selected'.tr),
                 position: controller.selectedLocation.value!,
               ),
             }
@@ -85,8 +85,8 @@ class AddLocationScreen extends GetView<LocationController> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Text(
-                    'Tap on the map to select a location',
+                  child:  Text(
+                    'Tap on the map to select a location'.tr,
                     textAlign: TextAlign.center,
                   ),
                 );
@@ -110,7 +110,7 @@ class AddLocationScreen extends GetView<LocationController> {
                   children: [
                     if (address != null) ...[
                       Text(
-                        'Selected Address:',
+                        'Selected Address:'.tr,
                         style: Theme
                             .of(context)
                             .textTheme
@@ -124,7 +124,7 @@ class AddLocationScreen extends GetView<LocationController> {
                       onPressed: () => controller.addLocation(location),
                       child: controller.isLoading.value
                           ? const CircularProgressIndicator()
-                          : const Text('Confirm Location'),
+                          :  Text('Confirm Location'.tr),
                     ),
                   ],
                 ),

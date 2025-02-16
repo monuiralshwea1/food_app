@@ -48,13 +48,13 @@ class LocationRepository {
 
   Future<void> updateLocationStatus(int locationId) async {
     try {
+
       final response = await _dioClient.post(
-        '/customers/updateLocationuest',
+        '/customers/updateLocation',
         data: {
           'id': locationId,
         },
       );
-
       if (response.data['status'] == false) {
         throw Exception(response.data['msg'] ?? 'Failed to update location status');
       }

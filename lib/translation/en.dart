@@ -41,7 +41,13 @@ final Map<String, String> enTranslations = {
   'Language': 'Language',
   'English': 'English',
   'Arabic': 'Arabic',
-
+  'My Locations':'My Locations',
+  'No locations added yet':'No locations added yet',
+  'Add New Location':'Add New Location',
+  'selected':'selected',
+  'Tap on the map to select a location':'Tap on the map to select a location',
+  'Selected Address':'Selected Address',
+  'Confirm Location':'Confirm Location',
   // الأقسام الخاصة بالطعام
   'All':'All',
   'appetizers': 'Appetizers',
@@ -78,6 +84,9 @@ final Map<String, String> enTranslations = {
   'Order Cancelled': 'Order Cancelled',
   'Out of Stock': 'Out of Stock',
   'New Notification': 'New Notification',
+  'Success':'Success',
+  'Location added successfully':'Location added successfully',
+  'Location updated successfully':'Location updated successfully',
 
   //واجهات الحساب
   'Account Settings':'Account Settings',

@@ -43,8 +43,8 @@ class LocationController extends GetxController {
         _getAddressFromLatLng(selectedLocation.value!);
       } else {
         Get.snackbar(
-          'Error',
-          'Please enable GPS and grant location permission',
+          'Error'.tr,
+          'Please enable GPS and grant location permission'.tr,
           snackPosition: SnackPosition.BOTTOM,
         );
       }
@@ -125,14 +125,14 @@ class LocationController extends GetxController {
 
       Get.back();
       Get.snackbar(
-        'Success',
-        'Location added successfully',
+        'Success'.tr,
+        'Location added successfully'.tr,
         snackPosition: SnackPosition.BOTTOM,
       );
     } catch (e) {
       error.value = e.toString();
       Get.snackbar(
-        'Error',
+        'Error'.tr,
         error.value,
         snackPosition: SnackPosition.BOTTOM,
       );
@@ -169,21 +169,23 @@ class LocationController extends GetxController {
       isLoading.value = true;
       error.value = '';
 
+
       await _locationRepository.updateLocationStatus(locationId);
+
       activeLocationId.value = locationId;
 
       // Refresh locations to get updated status
       await fetchLocations();
 
       Get.snackbar(
-        'Success',
-        'Location updated successfully',
+        'Success'.tr,
+        'Location updated successfully'.tr,
         snackPosition: SnackPosition.BOTTOM,
       );
     } catch (e) {
       error.value = e.toString();
       Get.snackbar(
-        'Error',
+        'Error'.tr,
         error.value,
         snackPosition: SnackPosition.BOTTOM,
       );
