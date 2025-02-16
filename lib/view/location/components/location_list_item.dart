@@ -18,7 +18,7 @@ class LocationListItem extends GetView<LocationController> {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: ListTile(
         leading: const Icon(Icons.location_on),
-        title: Text(location.additionalDetails ?? 'Unknown Location'),
+        title: Text(location.additionalDetails ?? 'Unknown Location'.tr),
         subtitle: Text(
           'Lat: ${location.latitude}, Long: ${location.longitude}',
         ),

@@ -46,8 +46,10 @@ final Map<String, String> enTranslations = {
   'Add New Location':'Add New Location',
   'selected':'selected',
   'Tap on the map to select a location':'Tap on the map to select a location',
+  'Selected Address:':'Selected Address:',
   'Selected Address':'Selected Address',
   'Confirm Location':'Confirm Location',
+  'Unknown Location':'Unknown Location',
   // الأقسام الخاصة بالطعام
   'All':'All',
   'appetizers': 'Appetizers',

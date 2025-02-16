@@ -46,8 +46,9 @@ final Map<String, String> arTranslations = {
   'Add New Location':'اضافة موقع جديد',
   'selected':'تم اختياره',
   'Tap on the map to select a location':'انقر على الخريطة لتحديد الموقع',
-  'Selected Address':'اختر العنووان',
+  'Selected Address:':':اختر العنووان',
   'Confirm Location':'تاكيد الموقع',
+  'Unknown Location':'موقوع مجهول',
   // الأقسام الخاصة بالطعام
   'All':'الكل',
   'appetizers': 'المقبلات',
