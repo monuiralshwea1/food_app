@@ -86,13 +86,7 @@ class AddToOrderScreen extends GetView<CartController> {
               child: Obx(() => ElevatedButton(
                     onPressed: () {
                       controller.addToCart(meal, quantity.value);
-                      Get.snackbar(
-                        'تم',
-                        'تمت إضافة ${meal.name} إلى السلة',
-                        backgroundColor: const Color(0xFF4CAF50),
-                        colorText: Colors.white,
-                      );
-                     // Get.back();
+                      Navigator.pop(context);
 
                     },
                     style: ElevatedButton.styleFrom(

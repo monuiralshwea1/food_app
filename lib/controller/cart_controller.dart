@@ -71,7 +71,6 @@ class CartController extends GetxController {
         backgroundColor: Colors.green,
         colorText: Colors.white,
       );
-      Get.toNamed(ScreenName.cartScreen);
     } catch (e) {
       Get.snackbar(
         'خطأ',
