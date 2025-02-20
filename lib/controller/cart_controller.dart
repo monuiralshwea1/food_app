@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import '../core/storge/storage_service.dart';
 import '../model/Order.dart';
 import '../model/cart_item.dart';
 import '../model/meal.dart';
+import '../core/network/dio_client.dart';
 import '../repositories/order_repositorie.dart';
 import '../route/RoutingPage.dart';
-
 
 class CartController extends GetxController {
   static const String CART_STORAGE_KEY = 'cart_items';
@@ -16,8 +16,11 @@ class CartController extends GetxController {
   final RxBool isLoading = false.obs;
   final storage = GetStorage();
   final OrderRepository orderRepository;
+  final RxDouble deliveryFee = 0.0.obs;
+  final RxBool isLoadingDeliveryFee = false.obs;
 
   CartController(this.orderRepository);
+
   @override
   void onInit() {
     super.onInit();
@@ -45,9 +48,29 @@ class CartController extends GetxController {
     }
   }
 
+  Future<double> getDeliveryFee() async {
+    try {
+      isLoadingDeliveryFee.value = true;
+
+        final fee = await orderRepository.getDeliveryFee();
+        deliveryFee.value = fee;
+        return fee;
+      }
+     catch (e) {
+      Get.snackbar(
+        'خطأ',
+        'فشل في جلب سعر التوصيل',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      rethrow;
+    } finally {
+      isLoadingDeliveryFee.value = false;
+    }
+  }
+
   void addToCart(Meal meal, int quantity) {
     try {
-
       final existingIndex = cartItems.indexWhere((item) => item.meal_id == meal.id);
       if (existingIndex >= 0) {
         cartItems[existingIndex].quantity += quantity;
@@ -64,14 +87,13 @@ class CartController extends GetxController {
         );
       }
       calculateTotal();
-      saveCartToStorage(); // حفظ بعد إضافة عنصر
+      saveCartToStorage();
       Get.snackbar(
         'تم',
         'تمت إضافة ${meal.name} إلى السلة',
         backgroundColor: Colors.green,
         colorText: Colors.white,
       );
-      Get.toNamed(ScreenName.cartScreen);
     } catch (e) {
       Get.snackbar(
         'خطأ',
@@ -86,7 +108,7 @@ class CartController extends GetxController {
     try {
       cartItems.removeWhere((item) => item.meal_id == mealId);
       calculateTotal();
-      saveCartToStorage(); // حفظ بعد حذف عنصر
+      saveCartToStorage();
       Get.snackbar(
         'تم',
         'تم حذف العنصر من السلة',
@@ -111,7 +133,7 @@ class CartController extends GetxController {
           cartItems[index].quantity = quantity;
           cartItems.refresh();
           calculateTotal();
-          saveCartToStorage(); // حفظ بعد تحديث الكمية
+          saveCartToStorage();
         }
       }
     } catch (e) {
@@ -125,21 +147,45 @@ class CartController extends GetxController {
   }
 
   void calculateTotal() {
-    total.value =
-        cartItems.fold(0, (sum, item) => sum + (item.price * item.quantity));
+    total.value = cartItems.fold(0, (sum, item) => sum + (item.price * item.quantity));
   }
 
   void clearCart() {
     cartItems.clear();
     total.value = 0;
-    saveCartToStorage(); // حفظ بعد تفريغ السلة
+    deliveryFee.value = 0;
+    saveCartToStorage();
+  }
+
+  void proceedToSummary() async {
+    if (cartItems.isEmpty) {
+      Get.snackbar(
+        'تنبيه',
+        'السلة فارغة',
+        backgroundColor: Colors.orange,
+        colorText: Colors.white,
+      );
+      return;
+    }
+
+    try {
+      // جلب سعر التوصيل قبل الانتقال إلى شاشة الملخص
+      await getDeliveryFee();
+      Get.toNamed('/order-summary');
+    } catch (e) {
+      Get.snackbar(
+        'خطأ',
+        'فشل في جلب سعر التوصيل. حاول مرة أخرى',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
   }
 
   Future<bool> placeOrder() async {
     try {
       isLoading.value = true;
 
-      // التحقق من وجود التوكن
       final storageService = Get.find<StorageService>();
       final token = await storageService.getToken();
 
@@ -150,16 +196,10 @@ class CartController extends GetxController {
           backgroundColor: Colors.orange,
           colorText: Colors.white,
         );
-
-        // الانتقال إلى صفحة تسجيل الدخول
         final result = await Get.toNamed(ScreenName.SinginScreen);
-
-        // إذا لم يتم تسجيل الدخول بنجاح
         if (result != true) {
           return false;
         }
-
-        // إعادة المحاولة بعد تسجيل الدخول
         return placeOrder();
       }
 
@@ -175,13 +215,11 @@ class CartController extends GetxController {
 
       final orderDetails = cartItems.map((item) => {
         'meal_id': item.meal_id,
-        //'price': item.price,
         'qty': item.quantity,
-        //'flage': 0,
       }).toList();
 
       final orderData = OrderModel(
-        totalPrice: total.value,
+        totalPrice: total.value + deliveryFee.value, // إضافة سعر التوصيل للسعر الإجمالي
         status: 'pending',
         orderDetails: orderDetails,
       );
@@ -208,9 +246,8 @@ class CartController extends GetxController {
       return false;
     } catch (e) {
       if (e.toString().contains('401')) {
-        // إذا كان الخطأ 401 (غير مصرح)
         final storageService = Get.find<StorageService>();
-        await storageService.deleteToken(); // حذف التوكن
+        await storageService.deleteToken();
 
         Get.snackbar(
           'تنبيه',
@@ -235,7 +272,6 @@ class CartController extends GetxController {
     }
   }
 
-
   Future<Map<String, dynamic>> submitPlaceOrder(OrderModel order) async {
     try {
       final response = await orderRepository.placeOrder(order);
@@ -247,7 +283,6 @@ class CartController extends GetxController {
 
   @override
   void onClose() {
-    // يمكنك إضافة أي تنظيف هنا
     super.onClose();
   }
 }

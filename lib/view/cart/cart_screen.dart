@@ -152,20 +152,22 @@ class CartScreen extends GetView<CartController> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    Obx(() => ElevatedButton(
-                          onPressed: controller.isLoading.value
-                              ? null
-                              : () => controller.placeOrder(),
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(double.infinity, 50),
-                          ),
-                          child: controller.isLoading.value
-                              ? const CircularProgressIndicator(color: Colors.white)
-                              : const Text(
-                                  'تأكيد الطلب',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                        )),
+                    Obx(() =>// In CartScreen, replace the confirm order button with:
+                    ElevatedButton(
+                      onPressed: controller.isLoading.value
+                          ? null
+                          : () => controller.proceedToSummary(),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 50),
+                      ),
+                      child: controller.isLoading.value
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : const Text(
+                        'متابعة الطلب',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    ),
                   ],
                 ),
               ),

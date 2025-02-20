@@ -14,7 +14,9 @@ import '../view/auth/sign_up_screen.dart';
 import '../view/cart/cart_screen.dart';
 import '../view/details/details_screen.dart';
 import '../view/featured/featurred_screen.dart';
+import '../view/order_summary/order_summary_screen.dar.dart';
 import '../view/splach_screen.dart';
+
 
 class ScreenName {
   static const String splash = "/";
@@ -27,6 +29,7 @@ class ScreenName {
   static const String mealScreen = "/mealScreen";
   static const String cartScreen = "/cartScreen";
   static const String locationScreen = "/locationScreen";
+  static const String orderSummary="/orderSummary";
 
 }
 
@@ -46,6 +49,11 @@ class RoutingPage {
       middlewares: [
         AuthMiddleware(),
       ],
+    ),
+    GetPage(
+      name: ScreenName.orderSummary,
+      page: () => const OrderSummaryScreen(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: ScreenName.locationScreen,
