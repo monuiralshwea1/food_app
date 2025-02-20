@@ -86,7 +86,8 @@ class SignController extends GetxController {
           phone: phoneController.text,
           password: passwordController.text,
         );
-        Get.back();//offAllNamed(ScreenName.entryPoint); // Navigate to home after successful login
+        //Get.back();
+        Get.offAllNamed(ScreenName.entryPoint); // Navigate to home after successful login
       } catch (e) {
         Get.snackbar(
           'Error',

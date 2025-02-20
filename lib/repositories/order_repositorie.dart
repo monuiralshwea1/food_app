@@ -24,7 +24,7 @@ class OrderRepository {
   Future<double> getDeliveryFee() async {
     try {
 
-      final response = await _dioClient.get('/orders/price_delivery');
+      final response = await _dioClient.get('/orders/prce_delivery');
 
       if (response.data['status'] == true) {
         final fee = double.parse(response.data['price_delivery'].toString());

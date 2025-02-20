@@ -171,8 +171,9 @@ class CartController extends GetxController {
     try {
       // جلب سعر التوصيل قبل الانتقال إلى شاشة الملخص
       await getDeliveryFee();
-      Get.toNamed('/order-summary');
+      Get.toNamed(ScreenName.orderSummary);
     } catch (e) {
+      Get.toNamed(ScreenName.SinginScreen);
       Get.snackbar(
         'خطأ',
         'فشل في جلب سعر التوصيل. حاول مرة أخرى',

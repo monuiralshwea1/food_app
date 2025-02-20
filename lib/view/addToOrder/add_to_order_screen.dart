@@ -93,7 +93,7 @@ class AddToOrderScreen extends GetView<CartController> {
                       minimumSize: const Size(double.infinity, 50),
                     ),
                     child: Text(
-                      'إضافة إلى السلة - ${(meal.price * quantity.value).toStringAsFixed(2)} ر.س',
+                      'إضافة إلى السلة - ${(meal.price * quantity.value).toStringAsFixed(2)} Yr',
                       style: const TextStyle(fontSize: 18),
                     ),
                   )),
