@@ -61,27 +61,27 @@ class LocationController extends GetxController {
       isLoading.value = true;
       error.value = '';
       // التحقق من وجود التوكن
-      final storageService = Get.find<StorageService>();
-      final token = await storageService.getToken();
-      if (token == null) {
-        Get.snackbar(
-          'تنبيه',
-          'يجب تسجيل الدخول أولاً',
-          backgroundColor:accentColor,
-          colorText: Colors.white,
-        );
-
-        // الانتقال إلى صفحة تسجيل الدخول
-        final result = await Get.toNamed(ScreenName.SinginScreen);
-
-        // إذا لم يتم تسجيل الدخول بنجاح
-        if (result != true) {
-          return false;
-        }
-
-        // إعادة المحاولة بعد تسجيل الدخول
-        return fetchLocations();
-      }
+      // final storageService = Get.find<StorageService>();
+      // final token = await storageService.getToken();
+      // if (token == null) {
+      //   Get.snackbar(
+      //     'تنبيه',
+      //     'يجب تسجيل الدخول أولاً',
+      //     backgroundColor:accentColor,
+      //     colorText: Colors.white,
+      //   );
+      //
+      //   // الانتقال إلى صفحة تسجيل الدخول
+      //   final result = await Get.toNamed(ScreenName.SinginScreen);
+      //
+      //   // إذا لم يتم تسجيل الدخول بنجاح
+      //   if (result != true) {
+      //     return false;
+      //   }
+      //
+      //   // إعادة المحاولة بعد تسجيل الدخول
+      //   return fetchLocations();
+      // }
 
       final fetchedLocations = await _locationRepository.getLocations();
       locations.assignAll(fetchedLocations);

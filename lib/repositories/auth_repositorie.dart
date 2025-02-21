@@ -1,3 +1,5 @@
+import 'package:foodly_ui/model/profile.dart';
+
 import '../core/storge/storage_service.dart';
 import '../model/user_model.dart';
 import '../../core/network/dio_client.dart';
@@ -48,11 +50,11 @@ class AuthRepository {
   }
 
 
-  Future<void> profile() async {
+  Future<Profile> profile() async {
     try {
       final response = await _dioClient.get('/customers/profile');
       if (response.data['status'] == true) {
-        print(response);
+        return Profile.fromJson(response.data['user']);    response.data['user'];
       }
       throw Exception(response.data['msg'] ?? 'Failed to load meal items');
     } catch (e) {

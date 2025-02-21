@@ -1,3 +1,4 @@
+import 'package:foodly_ui/model/profile.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,10 @@ class SignController extends GetxController {
   final confirmPasswordController = TextEditingController();
   final addressController = TextEditingController();
 
+
+  final RxBool isLoadingProfile = false.obs;
+  final RxString error = ''.obs;
+  final Rx<Profile?> profile =  Rx<Profile?>(null);
   SignController(this._authRepository);
 
   bool get obscureText => _obscureText.value;
@@ -86,8 +91,8 @@ class SignController extends GetxController {
           phone: phoneController.text,
           password: passwordController.text,
         );
-        //Get.back();
-        Get.offAllNamed(ScreenName.entryPoint); // Navigate to home after successful login
+       // Get.back();
+        Get.offNamed(ScreenName.entryPoint); // Navigate to home after successful login
       } catch (e) {
         Get.snackbar(
           'Error',
@@ -112,7 +117,8 @@ class SignController extends GetxController {
           phone: phoneController.text,
           address: addressController.text,
         );
-        Get.back();//Get.offAllNamed(ScreenName.entryPoint);
+        //Get.back();
+        Get.offNamed(ScreenName.entryPoint);
       } catch (e) {
         Get.snackbar(
           'Error',
@@ -123,6 +129,32 @@ class SignController extends GetxController {
         _isLoading.value = false;
       }
     }
+  }
+
+  Future<void>fetchProfile()async{
+
+     try{
+       isLoadingProfile.value=true;
+       error.value = '';
+       profile.value = await _authRepository.profile();
+     }
+     catch(e){
+       error.value = e.toString();
+
+     }
+     finally{
+       isLoadingProfile.value = false;
+     }
+
+
+  }
+
+  @override
+  void onInit(){
+    super.onInit();
+    fetchProfile();
+
+
   }
 
   @override

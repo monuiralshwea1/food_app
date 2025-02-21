@@ -49,14 +49,13 @@ class MealItemController extends GetxController {
 
   Future<void> fetchMealsFromCategory(int category_id) async {
     try {
-      meals.clear();
+     // meals.clear();
       isloadingMealCategory.value = true;
       erroMealCategory.value = '';
       final items = await _mealItemRepository.getMeaFromCategory(category_id);
       meals.assignAll(items);
     } catch (e) {
       erroMealCategory.value = e.toString();
-      print(erroMealCategory.value);
     } finally {
       isloadingMealCategory.value = false;
     }

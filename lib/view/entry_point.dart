@@ -20,6 +20,7 @@ class EntryPoint extends GetView<NavigationController> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       drawer:const AppDrawer(),
       body: Obx(() => _screens[controller.selectedIndex]),

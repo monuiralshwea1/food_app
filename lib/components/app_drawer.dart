@@ -28,7 +28,7 @@ class AppDrawer extends GetView<AppDrawerController> {
                   svgSrc: "assets/icons/profile.svg",
                   title: "Profile Information".tr,
                   subTitle: "Change your account information".tr,
-                  onTap: () => Get.toNamed('/profile'),
+                  onTap: () => Get.toNamed(ScreenName.profile),
                 ),
 
                 GetBuilder<AppDrawerController>(

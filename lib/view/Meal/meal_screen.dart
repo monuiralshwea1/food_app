@@ -75,19 +75,6 @@ class MealScreen extends GetView<MealItemController> {
       ),
       body: Obx(
         () {
-          if (controller.isLoading.value) {
-            return GridView.builder(
-              padding: const EdgeInsets.all(defaultPadding),
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 0.7,
-                mainAxisSpacing: defaultPadding,
-                crossAxisSpacing: defaultPadding,
-              ),
-              itemCount: 10,
-              itemBuilder: (context, index) => const MediumCardScalton(),
-            );
-          }
 
           if (controller.meals.isEmpty) {
             return const Center(
@@ -95,24 +82,27 @@ class MealScreen extends GetView<MealItemController> {
             );
           }
 
-          return GridView.builder(
-            padding: const EdgeInsets.all(defaultPadding),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              childAspectRatio: 0.7,
-              mainAxisSpacing: defaultPadding,
-              crossAxisSpacing: defaultPadding,
+          return RefreshIndicator(
+            onRefresh:()=>controller.fetchMealsFromCategory( Get.arguments['category_id']),
+            child: GridView.builder(
+              padding: const EdgeInsets.all(defaultPadding),
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                childAspectRatio: 0.7,
+                mainAxisSpacing: defaultPadding,
+                crossAxisSpacing: defaultPadding,
+              ),
+              itemCount: controller.meals.length,
+              itemBuilder: (context, index) {
+                final meal = controller.meals[index];
+                return MealListItem(
+                  meal: meal,
+                  press: () => Get.to(
+                    () => AddToOrderScreen(meal: meal),
+                  ),
+                );
+              },
             ),
-            itemCount: controller.meals.length,
-            itemBuilder: (context, index) {
-              final meal = controller.meals[index];
-              return MealListItem(
-                meal: meal,
-                press: () => Get.to(
-                  () => AddToOrderScreen(meal: meal),
-                ),
-              );
-            },
           );
         },
       ),

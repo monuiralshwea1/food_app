@@ -154,13 +154,13 @@ class CartScreen extends GetView<CartController> {
                     const SizedBox(height: 16),
                     Obx(() =>// In CartScreen, replace the confirm order button with:
                     ElevatedButton(
-                      onPressed: controller.isLoading.value
+                      onPressed: controller.proceedToSummaryLoading.value
                           ? null
                           : () => controller.proceedToSummary(),
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(double.infinity, 50),
                       ),
-                      child: controller.isLoading.value
+                      child: controller.proceedToSummaryLoading.value
                           ? const CircularProgressIndicator(color: Colors.white)
                           : const Text(
                         'متابعة الطلب',

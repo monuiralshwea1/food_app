@@ -7,11 +7,14 @@ class AuthMiddleware extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
     final storageService = Get.find<StorageService>();
-    final token = storageService.getToken();
 
-    if (token == null && route != ScreenName.SinginScreen) {
-      return const RouteSettings(name: ScreenName.SinginScreen);
+      storageService.getToken().then((token) {
+        if (token == null && route != ScreenName.SinginScreen) {
+           Get.offNamed(ScreenName.SinginScreen);
+        }
     }
+    );
+
 
     return null;
   }

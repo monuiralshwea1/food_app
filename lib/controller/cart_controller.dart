@@ -17,7 +17,7 @@ class CartController extends GetxController {
   final storage = GetStorage();
   final OrderRepository orderRepository;
   final RxDouble deliveryFee = 0.0.obs;
-  final RxBool isLoadingDeliveryFee = false.obs;
+  final RxBool isLoadingDeliveryFee = false.obs,proceedToSummaryLoading=false.obs;
 
   CartController(this.orderRepository);
 
@@ -158,6 +158,7 @@ class CartController extends GetxController {
   }
 
   void proceedToSummary() async {
+    proceedToSummaryLoading.value=true;
     if (cartItems.isEmpty) {
       Get.snackbar(
         'تنبيه',
@@ -165,21 +166,25 @@ class CartController extends GetxController {
         backgroundColor: Colors.orange,
         colorText: Colors.white,
       );
+      proceedToSummaryLoading.value=false;
       return;
     }
 
     try {
       // جلب سعر التوصيل قبل الانتقال إلى شاشة الملخص
       await getDeliveryFee();
+      proceedToSummaryLoading.value=false;
       Get.toNamed(ScreenName.orderSummary);
+
     } catch (e) {
-      Get.toNamed(ScreenName.SinginScreen);
-      Get.snackbar(
-        'خطأ',
-        'فشل في جلب سعر التوصيل. حاول مرة أخرى',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      proceedToSummaryLoading.value=false;
+      Get.toNamed(ScreenName.orderSummary);
+      // Get.snackbar(
+      //   'خطأ',
+      //   'فشل في جلب سعر التوصيل. حاول مرة أخرى',
+      //   backgroundColor: Colors.red,
+      //   colorText: Colors.white,
+      // );
     }
   }
 
