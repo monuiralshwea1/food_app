@@ -10,6 +10,8 @@ class MealItemController extends GetxController {
   final RxList<Meal> meals = <Meal>[].obs;
   final RxBool isLoading = false.obs, islodingMeal = false.obs,isloadingMealCategory=false.obs;
   final RxString error = ''.obs, erroMeals = ''.obs,erroMealCategory=''.obs;
+  var filteredMeals = <Meal>[].obs;
+  var searchQuery = ''.obs;
   MealItemController(this._mealItemRepository);
 
   @override
@@ -49,7 +51,7 @@ class MealItemController extends GetxController {
 
   Future<void> fetchMealsFromCategory(int category_id) async {
     try {
-     // meals.clear();
+      meals.clear();
       isloadingMealCategory.value = true;
       erroMealCategory.value = '';
       final items = await _mealItemRepository.getMeaFromCategory(category_id);
@@ -60,5 +62,18 @@ class MealItemController extends GetxController {
       isloadingMealCategory.value = false;
     }
   }
+
+  void searchMeals(String query) {
+    searchQuery.value = query;
+    if (query.isEmpty) {
+      filteredMeals.assignAll(meals);
+    } else {
+      filteredMeals.assignAll(
+        meals.where((meal) => meal.name.toLowerCase().contains(query.toLowerCase())).toList(),
+      );
+    }
+  }
+
+
 
 }

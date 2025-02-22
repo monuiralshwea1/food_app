@@ -34,7 +34,7 @@ class MealScreen extends GetView<MealItemController> {
               icon: const Icon(Icons.arrow_back_ios,
                   size: 18, color: Colors.black87),
               onPressed: (){
-                controller.fetchMealsFromItem(0);
+               // controller.fetchMealsFromItem(0);
                 return Get.back();
                 },
             ),
@@ -66,15 +66,19 @@ class MealScreen extends GetView<MealItemController> {
               child: IconButton(
                 icon: const Icon(Icons.search, color: Colors.black87),
                 onPressed: () {
-                  // Implement search functionality
+
                 },
               ),
             ),
           ),
+
         ],
       ),
       body: Obx(
         () {
+          if (controller.isloadingMealCategory.value) {
+            return buildFeaturedPartnersLoadingIndicator();
+          }
 
           if (controller.meals.isEmpty) {
             return const Center(
@@ -105,6 +109,20 @@ class MealScreen extends GetView<MealItemController> {
             ),
           );
         },
+      ),
+    );
+  }
+  SingleChildScrollView buildFeaturedPartnersLoadingIndicator() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(
+          2,
+              (index) => const Padding(
+            padding: EdgeInsets.only(left: defaultPadding),
+            child: MediumCardScalton(),
+          ),
+        ),
       ),
     );
   }
