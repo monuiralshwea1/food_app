@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import '../components/bottom_nav_bar.dart';
 import '../controller/navigation_controller.dart';
 import 'home/home_screen.dart';
+import 'order/order_screen.dart';
 import 'search/search_screen.dart';
-import 'orderDetails/order_details_screen.dart';
 import 'profile/profile_screen.dart';
 
 class EntryPoint extends GetView<NavigationController> {
@@ -14,7 +14,7 @@ class EntryPoint extends GetView<NavigationController> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const SearchScreen(),
-    const OrderDetailsScreen(),
+
     //const ProfileScreen(),
   ];
 

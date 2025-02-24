@@ -31,7 +31,7 @@ class HomeScreen extends GetView<MealItemController> {
           children: [
             Text(
               "Valley Restaurants".tr,
-              style: const TextStyle(color: Colors.green),
+              style: const TextStyle(color: primaryColor),
             )
           ],
         ),

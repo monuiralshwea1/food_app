@@ -1,3 +1,4 @@
+import 'package:foodly_ui/route/RoutingPage.dart';
 import 'package:get/get.dart';
 
 class NavigationController extends GetxController {
@@ -7,6 +8,10 @@ class NavigationController extends GetxController {
   get selectedIndex => _selectedIndex.value;
   
   void changeIndex(int index) {
-    _selectedIndex.value = index;
+    if (index == 2) {
+      Get.toNamed(ScreenName.order); // التنقل باستخدام المسار
+    } else {
+      selectedIndex.value = index;
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodly_ui/route/RoutingPage.dart';
 import 'package:get/get.dart';
 import '../controller/navigation_controller.dart';
 import 'nav_bar_item.dart';
@@ -39,7 +40,7 @@ class BottomNavBar extends GetView<NavigationController> {
               icon: 'assets/icons/order.svg',
               label: 'Orders'.tr,
               isSelected: controller.selectedIndex == 2,
-              onTap: () => controller.changeIndex(2),
+              onTap: () => Get.toNamed(ScreenName.order),
             ),
             // NavBarItem(
             //   icon: 'assets/icons/profile.svg',

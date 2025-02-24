@@ -77,6 +77,11 @@ final Map<String, String> arTranslations = {
   'Delivery Address': 'عنوان التوصيل',
   'Order Details': 'تفاصيل الطلب',
   'Track Order': 'تتبع الطلب',
+  'Your Orders':'طلباتي',
+  'OrderNumber':'رقم الطلب',
+  'Status:':':الحالة:',
+  'Date:':'التاريخ',
+
 
   // الإشعارات والرسائل
   'Oder Placed': 'تم تقديم الطلب',

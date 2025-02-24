@@ -4,6 +4,7 @@ import 'package:foodly_ui/binding.dart';
 import 'package:foodly_ui/view/Meal/meal_screen.dart';
 import 'package:foodly_ui/view/location/add_location_screen.dart';
 import 'package:foodly_ui/view/location/location_screen.dart';
+import 'package:foodly_ui/view/order/order_screen.dart';
 import 'package:foodly_ui/view/profile/profile_screen.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:foodly_ui/view/entry_point.dart';
@@ -34,6 +35,7 @@ class ScreenName {
   static const String AddlocationScreen = "/addlocationScreen";
   static const String orderSummary="/orderSummary";
   static const String profile="/profile";
+  static const String order="/order";
 
 
 }
@@ -73,6 +75,14 @@ class RoutingPage {
         LocationMiddleware(),],
     ),
     GetPage(name: ScreenName.profile, page: () =>  ProfileScreen()),
+
+    GetPage(
+      name: ScreenName.order,
+      page: () =>OrderScreen(),
+      middlewares: [
+        AuthMiddleware(),
+        ],
+    ),
 
   ];
 

@@ -58,7 +58,7 @@ class Info extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${meal.price} ر.س',
+                    '${meal.price}YER',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           color: primaryColor,
                           fontWeight: FontWeight.bold,

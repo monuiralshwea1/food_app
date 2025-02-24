@@ -18,7 +18,7 @@ class Items extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
-      physics: const ClampingScrollPhysics(),//const NeverScrollableScrollPhysics(),
+      physics: const AlwaysScrollableScrollPhysics(),//ClampingScrollPhysics(),//const NeverScrollableScrollPhysics(),
       itemCount: meals.length,
       itemBuilder: (context, index) => Padding(
         padding: const EdgeInsets.symmetric(
