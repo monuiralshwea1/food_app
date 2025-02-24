@@ -1,34 +1,27 @@
 class GetOrderDetails {
-  int? id;
-  int? orderId;
-  int? qty;
-  String? price;
-  int? total;
-  String? createdAt;
-  String? updatedAt;
   int? mealId;
+  String? mealName;
+  String? image;
+  String? price;
+  int? qty;
+  int? total;
 
   GetOrderDetails(
-      {this.id,
-        this.orderId,
-        this.qty,
+      {this.mealId,
+        this.mealName,
+        this.image,
         this.price,
-        this.total,
-        this.createdAt,
-        this.updatedAt,
-        this.mealId});
+        this.qty,
+        this.total});
 
   GetOrderDetails.fromJson(Map<String, dynamic> json) {
-    id = int.parse(json['id'].toString());
-    orderId = int.parse(json['orderId'].toString());
-    qty = int.parse(json['qty'].toString());
-    price = json['price'];
-    total = json['total'];
     mealId = json['meal_id'];
+    mealName = json['meal_name'];
+    image = json['image'];
+    price = json['price'];
+    qty = json['qty'];
+    total = json['total'];
   }
 
 
 }
-
-
-

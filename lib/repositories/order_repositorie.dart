@@ -1,5 +1,6 @@
 import '../core/network/dio_client.dart';
 import '../model/Order.dart';
+import '../model/get_order_detail.dart';
 
 
 class OrderRepository {
@@ -37,6 +38,21 @@ class OrderRepository {
     }
   }
 
+
+  Future<List<GetOrderDetails>> featchOrderDetails(int order_id) async {
+    try {
+      final response = await _dioClient.post('/categorys/mealsFromCategory',
+        queryParameters:{'category_id':category_id},
+      );
+      if (response.data['status'] == true) {
+        final List<dynamic> mealsJson = await response.data['meals'];
+        return mealsJson.map((json) => Meal.fromJson(json as Map<String, dynamic>)).toList();
+      }
+      throw Exception(response.data['msg'] ?? 'Failed to load meals');
+    } catch (e) {
+      throw Exception('Failed to load meals: $e');
+    }
+  }
 
 
 
