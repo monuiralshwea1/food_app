@@ -82,6 +82,8 @@ final Map<String, String> enTranslations = {
   'OrderNumber':'OrderNumber',
   'Status:':'Status:',
   'Date:':'Date: ',
+  'order_details':'order details',
+  'qty':'Quantity',
 
   // الإشعارات والرسائل
   'Order Placed': 'Order Placed',

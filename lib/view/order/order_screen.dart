@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodly_ui/route/RoutingPage.dart';
 import 'package:get/get.dart';
 import '../../components/scalton/medium_card_scalton.dart';
 import '../../constants.dart';
@@ -34,11 +35,14 @@ class OrderScreen extends GetView<GetOrderController>{
             itemCount: controller.getOrders.length,
             itemBuilder: (context, index) {
               var order = controller.getOrders[index];
-              return OrderCard(
-                orderId: order.id!,
-                status: order.status.toString(),
-                totalPrice: double.parse(order.totalPrice.toString()),
-                dateTime: order.dateTime.toString(),
+              return GestureDetector(
+                onTap:()=>Get.toNamed(ScreenName.orderDetailScreen,arguments: {'order_id':order.id}),
+                child: OrderCard(
+                  orderId: order.id!,
+                  status: order.status.toString(),
+                  totalPrice: double.parse(order.totalPrice.toString()),
+                  dateTime: order.dateTime.toString(),
+                ),
               );
             },
           ),

@@ -81,6 +81,8 @@ final Map<String, String> arTranslations = {
   'OrderNumber':'رقم الطلب',
   'Status:':':الحالة:',
   'Date:':'التاريخ',
+  'order_details':'تفاصيل الطلب',
+  'qty':'الكمية',
 
 
   // الإشعارات والرسائل

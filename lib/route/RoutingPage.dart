@@ -17,6 +17,7 @@ import '../view/auth/sign_up_screen.dart';
 import '../view/cart/cart_screen.dart';
 import '../view/details/details_screen.dart';
 import '../view/featured/featurred_screen.dart';
+import '../view/order/order_details_screen.dart';
 import '../view/order_summary/order_summary_screen.dar.dart';
 import '../view/splach_screen.dart';
 
@@ -36,6 +37,7 @@ class ScreenName {
   static const String orderSummary="/orderSummary";
   static const String profile="/profile";
   static const String order="/order";
+  static const String orderDetailScreen='/orderDetailScreen';
 
 
 }
@@ -82,6 +84,13 @@ class RoutingPage {
       middlewares: [
         AuthMiddleware(),
         ],
+    ),
+    GetPage(
+      name: ScreenName.orderDetailScreen,
+      page: () =>const OrderDetailsScreen(),
+      middlewares: [
+        AuthMiddleware(),
+      ],
     ),
 
   ];
