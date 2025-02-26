@@ -17,12 +17,14 @@ class OfferList extends GetView<OfferController> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
       child: Obx(() {
-        if (controller.offers.isEmpty) {
-          return const Center(child: Text("لا توجد عروض متاحة"));
-        }
+
         if (controller.isLoading.value) {
           return buildFeaturedPartnersLoadingIndicator();
         }
+        if (controller.offers.isEmpty) {
+          return const Center(child: Text("لا توجد عروض متاحة"));
+        }
+
 
         return  SizedBox(
           height:30.h,

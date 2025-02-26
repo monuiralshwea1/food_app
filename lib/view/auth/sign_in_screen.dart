@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,8 +5,6 @@ import 'package:get/get.dart';
 import '../../components/buttons/socal_button.dart';
 import '../../components/welcome_text.dart';
 import '../../constants.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
 import '../../route/RoutingPage.dart';
 import 'components/sign_in_form.dart';
 

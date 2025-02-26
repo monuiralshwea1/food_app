@@ -20,6 +20,10 @@ class MealItemList extends GetView<MealItemController> {
         // );
       }
 
+      if (controller.mealItems.isEmpty) {
+        return const Center(child: Text("لا توجد عروض متاحة"));
+      }
+
       if (controller.error.isNotEmpty) {
         return SizedBox(
           height: 10.h,

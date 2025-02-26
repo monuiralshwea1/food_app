@@ -37,7 +37,7 @@ class HomeScreen extends GetView<MealItemController> {
         ),
           actions: [
       Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding:  EdgeInsets.all(1.0.h),
       child: CircleAvatar(
         backgroundColor: Colors.black.withOpacity(0.05),
         child: IconButton(
@@ -53,22 +53,22 @@ class HomeScreen extends GetView<MealItemController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: defaultPadding),
+               SizedBox(height:3.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
                 child: BigCardImageSlide(images: demoBigImages),
               ),
-              const SizedBox(height: defaultPadding),
+               SizedBox(height:4.h),
               SectionTitle(title: "عروض خاصة"),
               OfferList(),
-              const SizedBox(height: defaultPadding * 2),
+               SizedBox(height: 1.h),
               SectionTitle(
                 title: "category".tr,
                 //press: () =>    Get.toNamed(ScreenName.featuredScreen),
               ),
               const SizedBox(height: defaultPadding),
               MediumCardList(),
-              const SizedBox(height: 1),
+               SizedBox(height: 1.h),
               // Banner
               //const PromotionBanner(),
               SectionTitle(
@@ -76,7 +76,7 @@ class HomeScreen extends GetView<MealItemController> {
                 //   press: () =>    Get.toNamed(ScreenName.featuredScreen),
               ),
               const MealItemList(),
-              const SizedBox(height: 20),
+               SizedBox(height: 2.h),
               // SectionTitle(title: "All Restaurants", press: () {}),
              // const SizedBox(height: 16),
 
@@ -85,14 +85,15 @@ class HomeScreen extends GetView<MealItemController> {
                 if (controller.islodingMeal.value) {
                   return buildFeaturedPartnersLoadingIndicator();
                 }
+                if (controller.meals.isEmpty) {
+                    return const Center(child: Text("لا توجد ,وجبات متاحة"));
+                }
 
                 if (controller.erroMeals.isNotEmpty) {
                   return Center(child: Text(controller.erroMeals.value));
                 }
 
-                if (controller.meals.isEmpty) {
-                  return const Center(child: Text("No meals available"));
-                }
+
 
                 return SizedBox(
                  // height: 400.h,

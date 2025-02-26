@@ -23,7 +23,7 @@ class MediumCardList extends GetView<CategoryController> {
       children: [
         SizedBox(
           width: double.infinity,
-          height: 254,
+          height: 30.h,
           child:Obx((){
             if (controller.isLoading.value) {
               return buildFeaturedPartnersLoadingIndicator();//SizedBox(
