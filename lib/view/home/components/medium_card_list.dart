@@ -31,6 +31,9 @@ class MediumCardList extends GetView<CategoryController> {
               //   child: const Center(child: CircularProgressIndicator()),
               // );
             }
+            if (controller.categorys.isEmpty) {
+              return const Center(child: Text("لا توجد اصناف متاحة"));
+            }
 
             if (controller.error.isNotEmpty) {
               SizedBox(
