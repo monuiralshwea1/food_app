@@ -87,7 +87,7 @@ class RoutingPage {
     ),
     GetPage(
       name: ScreenName.orderDetailScreen,
-      page: () =>const OrderDetailsScreen(),
+      page: () => OrderDetailsScreen(),
       middlewares: [
         AuthMiddleware(),
       ],

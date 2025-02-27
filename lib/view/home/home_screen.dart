@@ -35,40 +35,40 @@ class HomeScreen extends GetView<MealItemController> {
             )
           ],
         ),
-          actions: [
-      Padding(
-      padding:  EdgeInsets.all(1.0.h),
-      child: CircleAvatar(
-        backgroundColor: Colors.black.withOpacity(0.05),
-        child: IconButton(
-          icon: const Icon(Icons.shopping_cart, color: Colors.black87),
-          onPressed: () =>  Get.toNamed(ScreenName.cartScreen),
-        ),
-      ),
-    ),
-    ],
+        actions: [
+          Padding(
+            padding: EdgeInsets.all(1.0.h),
+            child: CircleAvatar(
+              backgroundColor: Colors.black.withOpacity(0.05),
+              child: IconButton(
+                icon: const Icon(Icons.shopping_cart, color: Colors.black87),
+                onPressed: () => Get.toNamed(ScreenName.cartScreen),
+              ),
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               SizedBox(height:3.h),
+              SizedBox(height: 3.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
                 child: BigCardImageSlide(images: demoBigImages),
               ),
-               SizedBox(height:4.h),
+              SizedBox(height: 4.h),
               SectionTitle(title: "عروض خاصة"),
               OfferList(),
-               SizedBox(height: 1.h),
+              SizedBox(height: 1.h),
               SectionTitle(
                 title: "category".tr,
                 //press: () =>    Get.toNamed(ScreenName.featuredScreen),
               ),
               const SizedBox(height: defaultPadding),
               MediumCardList(),
-               SizedBox(height: 1.h),
+              SizedBox(height: 1.h),
               // Banner
               //const PromotionBanner(),
               SectionTitle(
@@ -76,9 +76,9 @@ class HomeScreen extends GetView<MealItemController> {
                 //   press: () =>    Get.toNamed(ScreenName.featuredScreen),
               ),
               const MealItemList(),
-               SizedBox(height: 2.h),
+              SizedBox(height: 2.h),
               // SectionTitle(title: "All Restaurants", press: () {}),
-             // const SizedBox(height: 16),
+              // const SizedBox(height: 16),
 
               // Demo list of Big Cards
               Obx(() {
@@ -86,19 +86,22 @@ class HomeScreen extends GetView<MealItemController> {
                   return buildFeaturedPartnersLoadingIndicator();
                 }
                 if (controller.meals.isEmpty) {
-                    return const Center(child: Text("لا توجد ,وجبات متاحة"));
+                  return const Center(child: Text("لا توجد ,وجبات متاحة"));
                 }
 
                 if (controller.erroMeals.isNotEmpty) {
                   return Center(child: Text(controller.erroMeals.value));
                 }
 
-
-
                 return SizedBox(
-                 // height: 400.h,
+                  // height: 400.h,
                   width: 200.w,
-                  child:  Items(meals: controller.meals,),
+                  child: RefreshIndicator(
+                    onRefresh: ()=>controller.fetchMealItems(),
+                    child: Items(
+                      meals: controller.meals,
+                    ),
+                  ),
                   // ListView.builder(
                   //   shrinkWrap: true,
                   //   physics: const ClampingScrollPhysics(),
@@ -124,13 +127,14 @@ class HomeScreen extends GetView<MealItemController> {
       ),
     );
   }
+
   SingleChildScrollView buildFeaturedPartnersLoadingIndicator() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         children: List.generate(
           2,
-              (index) => const Padding(
+          (index) => const Padding(
             padding: EdgeInsets.only(left: defaultPadding),
             child: MediumCardScalton(),
           ),

@@ -21,7 +21,7 @@ class MealItemList extends GetView<MealItemController> {
       }
 
       if (controller.mealItems.isEmpty) {
-        return const Center(child: Text("لا توجد عروض متاحة"));
+        return const Center(child: Text("لا توجد اصناف وجبات متاحة"));
       }
 
       if (controller.error.isNotEmpty) {

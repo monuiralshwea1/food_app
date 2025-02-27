@@ -17,7 +17,6 @@ class OfferList extends GetView<OfferController> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
       child: Obx(() {
-
         if (controller.isLoading.value) {
           return buildFeaturedPartnersLoadingIndicator();
         }
@@ -25,9 +24,8 @@ class OfferList extends GetView<OfferController> {
           return const Center(child: Text("لا توجد عروض متاحة"));
         }
 
-
-        return  SizedBox(
-          height:30.h,
+        return SizedBox(
+          height: 30.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: controller.offers.length,
@@ -44,13 +42,31 @@ class OfferList extends GetView<OfferController> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
-                        BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 5),
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 5),
                       ],
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.network(offer.image, width: 280, height: 80, fit: BoxFit.cover),
+                        Image.network(
+                          offer.image,
+                          width: 280,
+                          height: 80,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              height: 180,
+                              color: Colors.grey[200],
+                              child: const Icon(
+                                Icons.restaurant,
+                                size: 50,
+                                color: Colors.grey,
+                              ),
+                            );
+                          },
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
@@ -58,11 +74,13 @@ class OfferList extends GetView<OfferController> {
                             children: [
                               Text(
                                 offer.mealName,
-                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 "خصم ${offer.discountPercentage}%",
-                                style: const TextStyle(fontSize: 14, color: Colors.red),
+                                style: const TextStyle(
+                                    fontSize: 14, color: Colors.red),
                               ),
                               Row(
                                 children: [
@@ -77,7 +95,10 @@ class OfferList extends GetView<OfferController> {
                                   const SizedBox(width: 5),
                                   Text(
                                     "${offer.discountedPrice}YER",
-                                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.green),
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.green),
                                   ),
                                 ],
                               ),
@@ -90,7 +111,12 @@ class OfferList extends GetView<OfferController> {
                                 child: ElevatedButton(
                                   onPressed: () {
                                     Get.to(
-                                          () => AddToOrderScreen(meal: Meal(id:offer.meal_id,name:offer.mealName,image: offer.image,price: offer.discountedPrice )),
+                                      () => AddToOrderScreen(
+                                          meal: Meal(
+                                              id: offer.meal_id,
+                                              name: offer.mealName,
+                                              image: offer.image,
+                                              price: offer.discountedPrice)),
                                     );
                                   },
                                   child: const Text("إضافة إلى السلة"),

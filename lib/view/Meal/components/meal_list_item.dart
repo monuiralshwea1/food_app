@@ -40,29 +40,22 @@ class MealListItem extends StatelessWidget {
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
                 child: AspectRatio(
                   aspectRatio: 1.3,
-                  child: meal.image != null
-                      ? Image.network(
+                  child:Image.network(
                           meal.image!,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              color: Colors.grey[200],
-                              child: const Icon(
-                                Icons.restaurant,
-                                color: Colors.grey,
-                                size: 40,
-                              ),
-                            );
-                          },
-                        )
-                      : Container(
-                          color: Colors.grey[200],
-                          child: const Icon(
-                            Icons.restaurant,
-                            color: Colors.grey,
-                            size: 40,
-                          ),
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        height: 180,
+                        color: Colors.grey[200],
+                        child: const Icon(
+                          Icons.restaurant,
+                          size: 50,
+                          color: Colors.grey,
                         ),
+                      );
+                    },
+                        ),
+
                 ),
               ),
               Padding(

@@ -29,13 +29,21 @@ class RestaurantInfoMediumCard extends StatelessWidget {
               aspectRatio: 1.25,
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
-                 child:category.image!=null? Image.network(
+                 child:Image.network(
                     category.image.toString(),
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Image.asset('assets/images/featured_items_3.png', fit: BoxFit.cover);
-                    },
-                  ):Image.asset('assets/images/featured _items_3.png', fit: BoxFit.cover),
+                     errorBuilder: (context, error, stackTrace) {
+                       return Container(
+                         height: 180,
+                         color: Colors.grey[200],
+                         child: const Icon(
+                           Icons.restaurant,
+                           size: 50,
+                           color: Colors.grey,
+                         ),
+                       );
+                     }
+                  ),
               ),
             ),
             const SizedBox(height: defaultPadding / 2),

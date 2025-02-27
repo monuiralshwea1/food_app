@@ -53,6 +53,17 @@ class OrderSummaryScreen extends GetView<CartController> {
                                 width: 60,
                                 height: 60,
                                 fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Container(
+                                      height: 180,
+                                      color: Colors.grey[200],
+                                      child: const Icon(
+                                        Icons.restaurant,
+                                        size: 50,
+                                        color: Colors.grey,
+                                      ),
+                                    );
+                                  }
                               ),
                             ),
                             title: Text(item.mealName),

@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../model/Offer.dart';
 import '../repositories/offer_repositorie.dart';
 
