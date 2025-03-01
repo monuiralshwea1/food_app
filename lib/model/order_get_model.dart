@@ -26,5 +26,14 @@ class OrderModelGet {
 
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id?.toString(), // تحويل id إلى String لتجنب أي مشاكل
+      'dateTime': dateTime,
+      'status': status,
+      'totalPrice': totalPrice,
+    };
+  }
+
 
 }

@@ -15,6 +15,7 @@ import 'controller/drawer_controller.dart';
 import 'controller/location_controller.dart';
 import 'controller/navigation_controller.dart';
 import 'core/network/dio_client.dart';
+import 'core/network_cache_service.dart';
 import 'core/storge/storage_service.dart';
 import 'repositories/location_repository.dart';
 
@@ -26,6 +27,7 @@ class Binding extends Bindings{
     Get.lazyPut(() => StorageService(),fenix:true);
     Get.lazyPut(() => DioClient(Get.find<StorageService>()),fenix:true);
     Get.lazyPut(()=>NavigationController(),fenix:true);
+    Get.lazyPut(()=>NetworkCacheService(), fenix: true);
     Get.lazyPut(() => AuthRepository(Get.find<DioClient>(), Get.find<StorageService>()),fenix:true);
     Get.lazyPut(()=>SignController(Get.find<AuthRepository>()),fenix:true);
     Get.lazyPut(()=> AppDrawerController(Get.find<StorageService>()),fenix:true);
@@ -41,6 +43,7 @@ class Binding extends Bindings{
     Get.lazyPut(()=>LocationController(Get.find<LocationRepository>()),fenix: true);
     Get.lazyPut(()=>GetOrderRepository(Get.find<DioClient>()),fenix: true);
     Get.lazyPut(()=>GetOrderController(Get.find<GetOrderRepository>()),fenix: true);
+
 
 
 

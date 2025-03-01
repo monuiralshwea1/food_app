@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
 
 import '../constants.dart';
+import '../core/network_cache_service.dart';
 import '../core/storge/storage_service.dart';
 import '../model/location_model.dart';
 import '../repositories/location_repository.dart';
@@ -23,6 +26,9 @@ class LocationController extends GetxController {
   final RxBool isGettingLocation = false.obs;
   final RxInt activeLocationId = RxInt(-1);
 
+  final NetworkCacheService _networkCacheService = Get.find<NetworkCacheService>();
+  Timer? _updateTimer;
+
   LocationController(this._locationRepository);
 
   @override
@@ -30,6 +36,19 @@ class LocationController extends GetxController {
     super.onInit();
     fetchLocations();
     getCurrentLocation();
+    _startAutoUpdate(); // تحديث دوري للبيانات
+  }
+
+  @override
+  void onClose() {
+    _updateTimer?.cancel();
+    super.onClose();
+  }
+
+  void _startAutoUpdate() {
+    _updateTimer = Timer.periodic(Duration(minutes: 5), (timer) {
+      fetchLocations();
+    });
   }
 
   Future<void> getCurrentLocation() async {
@@ -60,41 +79,20 @@ class LocationController extends GetxController {
     try {
       isLoading.value = true;
       error.value = '';
-      // التحقق من وجود التوكن
-      // final storageService = Get.find<StorageService>();
-      // final token = await storageService.getToken();
-      // if (token == null) {
-      //   Get.snackbar(
-      //     'تنبيه',
-      //     'يجب تسجيل الدخول أولاً',
-      //     backgroundColor:accentColor,
-      //     colorText: Colors.white,
-      //   );
+      // final cachedData = _networkCacheService.loadFromCache('locations');
+      // if (cachedData != null) {
+      //   locations.assignAll(cachedData.map((e) => LocationModel.fromJson(e)).toList());
       //
-      //   // الانتقال إلى صفحة تسجيل الدخول
-      //   final result = await Get.toNamed(ScreenName.SinginScreen);
-      //
-      //   // إذا لم يتم تسجيل الدخول بنجاح
-      //   if (result != true) {
-      //     return false;
-      //   }
-      //
-      //   // إعادة المحاولة بعد تسجيل الدخول
-      //   return fetchLocations();
       // }
+      /// **🔹 التحقق من الإنترنت وجلب البيانات من API إذا لزم الأمر**
+      // if (await _networkCacheService.hasInternet()) {
 
-      final fetchedLocations = await _locationRepository.getLocations();
-      locations.assignAll(fetchedLocations);
+        final fetchedLocations = await _locationRepository.getLocations();
+        locations.assignAll(fetchedLocations);
+       // _networkCacheService.saveToCache('locations',fetchedLocations.map((e) => e.toJson()).toList());
 
-      // Set active location
-      for (var location in fetchedLocations) {
-        if (location.isAvailable) {
-          activeLocationId.value = location.id;
-          break;
-        }
-      }
+      //}
 
-      return true;
     } catch (e) {
       error.value = e.toString();
       return false;

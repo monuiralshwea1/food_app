@@ -1,8 +1,9 @@
 import 'package:foodly_ui/model/meal.dart';
 import 'package:get/get.dart';
-
 import '../model/meal_item.dart';
 import '../repositories/meal_item_repositorie.dart';
+import '../core/network_cache_service.dart';
+import 'dart:async';
 
 class MealItemController extends GetxController {
   final MealItemRepository _mealItemRepository;
@@ -12,6 +13,8 @@ class MealItemController extends GetxController {
   final RxString error = ''.obs, erroMeals = ''.obs,erroMealCategory=''.obs;
   var filteredMeals = <Meal>[].obs;
   var searchQuery = ''.obs;
+  final NetworkCacheService _networkCacheService = Get.find<NetworkCacheService>();
+  Timer? _updateTimer;
   MealItemController(this._mealItemRepository);
 
   @override
@@ -19,15 +22,36 @@ class MealItemController extends GetxController {
     super.onInit();
     fetchMealsFromItem(0);
     fetchMealItems();
+    _startAutoUpdate(); // تحديث دوري للبيانات
+  }
+  @override
+  void onClose() {
+    _updateTimer?.cancel();
+    super.onClose();
+  }
+
+  void _startAutoUpdate() {
+    _updateTimer = Timer.periodic(Duration(minutes: 5), (timer) {
+      fetchMealItems();
+    });
   }
 
   Future<void> fetchMealItems() async {
     try {
       isLoading.value = true;
       error.value = '';
-      final items = await _mealItemRepository.getMealItems();
-      mealItems.assignAll(items);
-      mealItems.insert(0, MealItem(id: 0, name: 'All'.tr));
+      final cachedData = _networkCacheService.loadFromCache('mealItems');
+      if (cachedData != null) {
+        mealItems.assignAll(cachedData.map((e) => MealItem.fromJson(e)).toList());
+        mealItems.insert(0, MealItem(id: 0, name: 'All'.tr));
+      }
+      /// ** التحقق من الإنترنت وجلب البيانات من API إذا لزم الأمر**
+      if (await _networkCacheService.hasInternet()) {
+        final items = await _mealItemRepository.getMealItems();
+        mealItems.assignAll(items);
+        mealItems.insert(0, MealItem(id: 0, name: 'All'.tr));
+        _networkCacheService.saveToCache('mealItems', items.map((e) => e.toJson()).toList());
+      }
     } catch (e) {
       error.value = e.toString();
     } finally {

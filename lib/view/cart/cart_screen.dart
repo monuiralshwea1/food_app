@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import '../../controller/cart_controller.dart';
 import '../../constants.dart';
 
@@ -58,12 +59,13 @@ class CartScreen extends GetView<CartController> {
                               borderRadius: BorderRadius.circular(8),
                               child: Image.network(
                                 item.image,
-                                width: 80,
-                                height: 80,
+                                width: 15.w,
+                                height: 8.h,
                                 fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) {
                                     return Container(
-                                      height: 180,
+                                      height: 10.h,
+                                      width:10.w,
                                       color: Colors.grey[200],
                                       child: const Icon(
                                         Icons.restaurant,

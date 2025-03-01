@@ -6,7 +6,7 @@ class DioClient {
   final Dio _dio = Dio();
   final StorageService _storageService;
 
-  static const String baseUrl = 'http://192.168.1.135:8000/api';
+  static const String baseUrl = 'http://192.168.1.221:8000/api';
 
   DioClient(this._storageService) {
     _dio.options.baseUrl = baseUrl;

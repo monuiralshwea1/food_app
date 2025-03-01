@@ -13,7 +13,7 @@ class MealItemList extends GetView<MealItemController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (controller.isLoading.value) {
+      if (controller.isloadingMealCategory.value) {
         return buildFeaturedPartnersLoadingIndicator(); //SizedBox(
         //   height: 10.h,
         //   child: const Center(child: CircularProgressIndicator()),
@@ -24,7 +24,7 @@ class MealItemList extends GetView<MealItemController> {
         return const Center(child: Text("لا توجد اصناف وجبات متاحة"));
       }
 
-      if (controller.error.isNotEmpty) {
+      if (controller.erroMealCategory.isNotEmpty) {
         return SizedBox(
           height: 10.h,
           child: Center(child: Text(controller.error.value)),

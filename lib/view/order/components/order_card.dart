@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class OrderCard extends StatelessWidget {
   final int orderId;
   final String status;
-  final double totalPrice;
+  final String totalPrice;
   final String dateTime;
 
   const OrderCard({

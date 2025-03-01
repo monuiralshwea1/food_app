@@ -34,6 +34,19 @@ class Offer {
       endDate: DateTime.parse(json['end_date']),
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id.toString(), // تحويل id إلى String لتجنب أي مشاكل
+      'meal_id': meal_id,
+      'mealName':mealName,
+      'image':image,
+      'originalPrice':originalPrice,
+      'discountPercentage':discountPercentage,
+      'discountedPrice':discountedPrice,
+      'startDate':startDate,
+      'endDate':endDate
+    };
+  }
 }
 
 List<Offer> parseOffers(Map<String, dynamic> jsonResponse) {

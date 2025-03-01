@@ -16,4 +16,13 @@ class Category {
       description: json['description'] as String?,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id?.toString(), // تحويل id إلى String لتجنب أي مشاكل
+      'name': name,
+      'image': image,
+      'description': description,
+    };
+  }
 }

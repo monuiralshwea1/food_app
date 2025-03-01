@@ -40,7 +40,7 @@ class OrderScreen extends GetView<GetOrderController>{
                 child: OrderCard(
                   orderId: order.id!,
                   status: order.status.toString(),
-                  totalPrice: double.parse(order.totalPrice.toString()),
+                  totalPrice: order.totalPrice.toString(),
                   dateTime: order.dateTime.toString(),
                 ),
               );

@@ -52,12 +52,13 @@ class OfferList extends GetView<OfferController> {
                       children: [
                         Image.network(
                           offer.image,
-                          width: 280,
-                          height: 80,
+                          width: 60.w,
+                          height: 10.h,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) {
                             return Container(
-                              height: 180,
+                              height: 12.h,
+                              width: 80.w,
                               color: Colors.grey[200],
                               child: const Icon(
                                 Icons.restaurant,

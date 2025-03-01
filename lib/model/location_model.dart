@@ -25,6 +25,8 @@ class LocationModel {
     required this.updatedAt,
   });
 
+
+
   factory LocationModel.fromJson(Map<String, dynamic> json) {
     return LocationModel(
       id: json['id'],
@@ -39,11 +41,15 @@ class LocationModel {
     );
   }
 
+
+
   Map<String, dynamic> toJson() {
     return {
+      'id':id,
       'latitude': latitude,
       'longitude': longitude,
       'additional_details': additionalDetails,
+      'is_available': isAvailable
     };
   }
 }
