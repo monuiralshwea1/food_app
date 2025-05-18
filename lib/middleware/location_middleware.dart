@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodly_ui/route/RoutingPage.dart';
 import 'package:get/get.dart';
 
+import '../constants.dart';
 import '../core/storge/storage_service.dart';
 
 
@@ -14,7 +15,7 @@ class LocationMiddleware extends GetMiddleware {
         Get.snackbar(
           'Authentication Required'.tr,
           'Please sign in to manage your locations'.tr,
-          backgroundColor: Colors.orange,
+          backgroundColor:accentColor,
           colorText: Colors.white,
           duration: const Duration(seconds: 3),
           mainButton: TextButton(

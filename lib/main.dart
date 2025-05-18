@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
           fallbackLocale: const Locale('ar'),
           defaultTransition: Transition.fade,
           theme: ThemeData(
+            fontFamily:"Cairo",
             colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(

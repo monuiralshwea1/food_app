@@ -35,7 +35,7 @@ class LocationModel {
       longitude: json['longitude'],
       location: json['location'],
       additionalDetails: json['additional_details'],
-      isAvailable: json['is_available'] == 1,
+      isAvailable: json['is_available']==1,
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
     );

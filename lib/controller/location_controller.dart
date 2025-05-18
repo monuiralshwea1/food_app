@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -45,11 +46,18 @@ class LocationController extends GetxController {
     super.onClose();
   }
 
+
+
+/////////////////////////////////////////////////////////////////
   void _startAutoUpdate() {
     _updateTimer = Timer.periodic(Duration(minutes: 5), (timer) {
       fetchLocations();
     });
   }
+
+
+
+  ////////////////////////////////////////////////////////////////
 
   Future<void> getCurrentLocation() async {
     try {
@@ -75,6 +83,11 @@ class LocationController extends GetxController {
     }
   }
 
+
+
+
+  //////////////////////////////////////////////////////////////
+
   Future<dynamic> fetchLocations() async {
     try {
       isLoading.value = true;
@@ -89,11 +102,17 @@ class LocationController extends GetxController {
 
         final fetchedLocations = await _locationRepository.getLocations();
         locations.assignAll(fetchedLocations);
+        final availableLocation = locations.firstWhereOrNull((loc) => loc.isAvailable == true);
+      if (availableLocation != null) {
+        activeLocationId.value = availableLocation.id;
+      }
+
        // _networkCacheService.saveToCache('locations',fetchedLocations.map((e) => e.toJson()).toList());
 
       //}
 
     } catch (e) {
+
       error.value = e.toString();
       return false;
     } finally {
@@ -101,6 +120,9 @@ class LocationController extends GetxController {
     }
   }
 
+
+
+////////////////////////////////////////////////////////////////////
   Future<void> addLocation(LatLng position) async {
     try {
       isLoading.value = true;
@@ -141,11 +163,16 @@ class LocationController extends GetxController {
     }
   }
 
+
+
+/////////////////////////////////////////////////////////
   void updateSelectedLocation(LatLng location) {
     selectedLocation.value = location;
     _getAddressFromLatLng(location);
   }
 
+
+  //////////////////////////////////////////////////////
   Future<void> _getAddressFromLatLng(LatLng location) async {
     try {
       final placemarks = await placemarkFromCoordinates(
@@ -164,6 +191,9 @@ class LocationController extends GetxController {
     }
   }
 
+
+  ///////////////////////////////////////////////////
+
   Future<void> setActiveLocation(int locationId) async {
     try {
       isLoading.value = true;
@@ -172,7 +202,7 @@ class LocationController extends GetxController {
 
       await _locationRepository.updateLocationStatus(locationId);
 
-      activeLocationId.value = locationId;
+      //activeLocationId.value = locationId;
 
       // Refresh locations to get updated status
       await fetchLocations();

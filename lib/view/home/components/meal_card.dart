@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodly_ui/constants.dart';
 import '../../../model/meal.dart';
 import 'package:get/get.dart';
 class MealCard extends StatelessWidget {
@@ -72,7 +73,7 @@ class MealCard extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: Colors.green,
+                          color:primaryColor,
                         ),
                       ),
                       // Add Button
@@ -81,7 +82,7 @@ class MealCard extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: onPressed,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
+                            backgroundColor: primaryColor,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),

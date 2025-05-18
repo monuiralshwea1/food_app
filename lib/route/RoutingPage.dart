@@ -64,8 +64,8 @@ class RoutingPage {
       name: ScreenName.locationScreen,
       page: () => const LocationScreen(),
       middlewares: [
-        //AuthMiddleware(),
-        LocationMiddleware(),
+        AuthMiddleware(),
+        //LocationMiddleware(),
       ],
     ),
 
@@ -73,8 +73,9 @@ class RoutingPage {
       name: ScreenName.AddlocationScreen,
       page: () => const AddLocationScreen(),
       middlewares: [
-        //AuthMiddleware(),
-        LocationMiddleware(),],
+        AuthMiddleware(),
+        //LocationMiddleware(),
+      ],
     ),
     GetPage(name: ScreenName.profile, page: () =>  ProfileScreen()),
 
