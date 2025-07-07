@@ -50,8 +50,6 @@ class OfferController extends GetxController {
       
       final items = await _offerRepository.getOffers();
       offers.assignAll(items); // <-- تحديث القائمة دائماً
-
-      print("name is ${offers[0].mealName}");
       _networkCacheService.saveToCache('offers', items.map((e) => e.toJson()).toList());
     }
 
