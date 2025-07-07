@@ -25,7 +25,7 @@ class OfferList extends GetView<OfferController> {
         }
 
         return SizedBox(
-          height: 30.h,
+          height: 38.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: controller.offers.length,
@@ -37,7 +37,7 @@ class OfferList extends GetView<OfferController> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Container(
-                    width: 280,
+                    width: 50.w,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
@@ -50,24 +50,22 @@ class OfferList extends GetView<OfferController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.network(
-                          offer.image,
-                          width: 60.w,
-                          height: 10.h,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              height: 12.h,
-                              width: 80.w,
-                              color: Colors.grey[200],
-                              child: const Icon(
-                                Icons.restaurant,
-                                size: 50,
-                                color: Colors.grey,
-                              ),
-                            );
-                          },
-                        ),
+                        if(offer.image != null)
+                          Image.network(
+                            offer.image!,
+                            width: double.infinity,
+                            height: 120.h,
+                            fit: BoxFit.cover,
+                          )
+                        else
+                          Container(
+                            width: double.infinity,
+                            height: 150,
+                            color: Colors.grey[300],
+                            child: const Center(
+                              child: Text("لا توجد صورة متاحة"),
+                            ),
+                          ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(

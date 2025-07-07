@@ -16,9 +16,9 @@ class OfferRepository {
         final List<dynamic> offersJson = await response.data['all_offers'];
         return offersJson.map((json) => Offer.fromJson(json as Map<String, dynamic>)).toList();
       }
-      throw Exception(response.data['msg'] ?? 'Failed to load meal items');
+      throw Exception(response.data['msg'] ?? 'Failed to load offers');
     } catch (e) {
-      throw Exception('Failed to load meal items: $e');
+      throw Exception('Failed to load offers: ${e.toString()}');
     }
   }
 

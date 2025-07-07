@@ -32,28 +32,35 @@ class OfferController extends GetxController {
     });
   }
 
-  Future<void> fetchOffer() async {
-    try {
-      isLoading.value = true;
-      error.value = '';
-      final cachedData = _networkCacheService.loadFromCache('offers');
-      if (cachedData != null) {
-       offers.assignAll(cachedData.map((e) => Offer.fromJson(e)).toList());
-     }
+ Future<void> fetchOffer() async {
+  try {
+    isLoading.value = true;
+    error.value = '';
 
-      /// ** التحقق من الإنترنت وجلب البيانات من API إذا لزم الأمر**
-      if (await _networkCacheService.hasInternet()) {
-        final items = await _offerRepository.getOffers();
-        offers.assignAll(items);
-        _networkCacheService.saveToCache('offers', items.map((e) => e.toJson()).toList());
-      }
-
-    } catch (e) {
-      error.value = e.toString();
-    } finally {
-      isLoading.value = false;
+    // 1. تحميل الكاش أولاً (لعرض بيانات سريعة)
+    final cachedData = _networkCacheService.loadFromCache('offers');
+      
+    if (cachedData != null && cachedData.isNotEmpty) {
+    
+      offers.assignAll(cachedData.map((e) => Offer.fromJson(e)).toList());
     }
+
+    // 2. دائماً جلب البيانات من السيرفر وتحديث القائمة والكاش
+    if (await _networkCacheService.hasInternet()) {
+      
+      final items = await _offerRepository.getOffers();
+      offers.assignAll(items); // <-- تحديث القائمة دائماً
+
+      print("name is ${offers[0].mealName}");
+      _networkCacheService.saveToCache('offers', items.map((e) => e.toJson()).toList());
+    }
+
+  } catch (e) {
+    error.value = e.toString();
+  } finally {
+    isLoading.value = false;
   }
+}
 
 
 

@@ -40,20 +40,30 @@ class MealListItem extends StatelessWidget {
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
                 child: AspectRatio(
                   aspectRatio: 1.3,
-                  child:Image.network(
+                  child: (meal.image != null && meal.image!.isNotEmpty)
+                      ? Image.network(
                           meal.image!,
                           fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        height: 180,
-                        color: Colors.grey[200],
-                        child: const Icon(
-                          Icons.restaurant,
-                          size: 50,
-                          color: Colors.grey,
-                        ),
-                      );
-                    },
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              height: 180,
+                              color: Colors.grey[200],
+                              child: const Icon(
+                                Icons.restaurant,
+                                size: 50,
+                                color: Colors.grey,
+                              ),
+                            );
+                          },
+                        )
+                      : Container(
+                          height: 180,
+                          color: Colors.grey[200],
+                          child: const Icon(
+                            Icons.restaurant,
+                            size: 50,
+                            color: Colors.grey,
+                          ),
                         ),
 
                 ),
@@ -72,7 +82,7 @@ class MealListItem extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 4),
-                    if (meal.description != null) ...[
+                    if (meal.description != null && meal.description!.isNotEmpty) ...[
                       Text(
                         meal.description!,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(

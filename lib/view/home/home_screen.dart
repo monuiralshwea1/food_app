@@ -89,9 +89,9 @@ class HomeScreen extends GetView<MealItemController> {
                   return const Center(child: Text("لا توجد ,وجبات متاحة"));
                 }
 
-                if (controller.erroMeals.isNotEmpty) {
-                  return Center(child: Text(controller.erroMeals.value));
-                }
+                // if (controller.erroMeals.isNotEmpty) {
+                //    return Center(child: Text(controller.erroMeals.value));
+                // }
 
                 return SizedBox(
                   // height: 400.h,

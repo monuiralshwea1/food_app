@@ -38,6 +38,7 @@ class MealItemController extends GetxController {
 
   Future<void> fetchMealItems() async {
     try {
+    
       isLoading.value = true;
       error.value = '';
       final cachedData = _networkCacheService.loadFromCache('mealItems');
@@ -53,7 +54,9 @@ class MealItemController extends GetxController {
         _networkCacheService.saveToCache('mealItems', items.map((e) => e.toJson()).toList());
       }
     } catch (e) {
+
       error.value = e.toString();
+  
     } finally {
       isLoading.value = false;
     }

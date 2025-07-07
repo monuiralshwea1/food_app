@@ -101,7 +101,7 @@ class LocationScreen extends GetView<LocationController> {
           ),
         );
       }),
-    );
+    ); 
   }
 }
 
